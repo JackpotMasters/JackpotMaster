@@ -1,0 +1,1214 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JackpotMaster</title>
+<meta name="description" content="Des jackpots gratuits tous les soirs. Version test.">
+<meta name="theme-color" content="#FFF1DC">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="JackpotMaster">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+html,body{height:100%}
+body{margin:0;background:#FFF1DC;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+#app{min-height:100%}
+
+
+a{color:#B45309}a:hover{color:#92400E}
+button{font-family:inherit;cursor:pointer}
+button:disabled{cursor:default}
+button{transition:transform .12s ease}
+button:active:not(:disabled){transform:scale(.95)}
+@keyframes jm-plus{0%{transform:scale(.3);opacity:0}25%{transform:scale(1.3);opacity:1}45%{transform:scale(1)}80%{opacity:1;transform:translateY(-30px)}100%{opacity:0;transform:translateY(-60px)}}
+@keyframes jm-ring{0%{transform:scale(.2);opacity:1}100%{transform:scale(4.5);opacity:0}}
+@keyframes jm-wiggle{0%,60%,100%{transform:rotate(0) scale(1)}10%{transform:rotate(-6deg) scale(1.08)}20%{transform:rotate(6deg) scale(1.08)}30%{transform:rotate(-3deg) scale(1.04)}40%{transform:rotate(0) scale(1)}}
+@keyframes jm-b0{to{transform:translate(120px,40px) rotate(360deg);opacity:0}}
+@keyframes jm-b1{to{transform:translate(148px,101px) rotate(-300deg);opacity:0}}
+@keyframes jm-b2{to{transform:translate(85px,125px) rotate(280deg);opacity:0}}
+@keyframes jm-b3{to{transform:translate(61px,188px) rotate(-360deg);opacity:0}}
+@keyframes jm-b4{to{transform:translate(0,160px) rotate(320deg);opacity:0}}
+@keyframes jm-b5{to{transform:translate(-61px,188px) rotate(-280deg);opacity:0}}
+@keyframes jm-b6{to{transform:translate(-85px,125px) rotate(360deg);opacity:0}}
+@keyframes jm-b7{to{transform:translate(-148px,101px) rotate(-320deg);opacity:0}}
+@keyframes jm-b8{to{transform:translate(-120px,40px) rotate(300deg);opacity:0}}
+@keyframes jm-b9{to{transform:translate(-148px,-21px) rotate(-360deg);opacity:0}}
+@keyframes jm-b10{to{transform:translate(-85px,-45px) rotate(280deg);opacity:0}}
+@keyframes jm-b11{to{transform:translate(-61px,-108px) rotate(-300deg);opacity:0}}
+@keyframes jm-b12{to{transform:translate(0,-80px) rotate(360deg);opacity:0}}
+@keyframes jm-b13{to{transform:translate(61px,-108px) rotate(-280deg);opacity:0}}
+@keyframes jm-b14{to{transform:translate(85px,-45px) rotate(320deg);opacity:0}}
+@keyframes jm-b15{to{transform:translate(148px,-21px) rotate(-360deg);opacity:0}}
+@keyframes jm-gold-in{0%{transform:translateY(-380px) rotateY(0) rotateZ(-20deg) scale(.4);opacity:0}15%{opacity:1}55%{transform:translateY(16px) rotateY(540deg) rotateZ(4deg) scale(1.12)}75%{transform:translateY(-6px) rotateY(700deg) rotateZ(-2deg) scale(.98)}100%{transform:translateY(0) rotateY(720deg) rotateZ(0) scale(1);opacity:1}}
+@keyframes jm-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes jm-sheen{0%{left:-120px}45%,100%{left:340px}}
+@keyframes jm-spin{to{transform:rotate(360deg)}}
+@keyframes jm-fade{from{opacity:0}to{opacity:1}}
+@keyframes jm-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes jm-twinkle{0%,100%{transform:scale(0) rotate(0);opacity:0}50%{transform:scale(1) rotate(90deg);opacity:1}}
+@keyframes jm-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes jm-pop-in{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes jm-drop{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:none}}
+@keyframes jm-tickA{0%{transform:translateY(-40%) scale(1.3);opacity:.15}60%{transform:translateY(0) scale(.95);opacity:1}100%{transform:none;opacity:1}}
+@keyframes jm-tickB{0%{transform:translateY(-40%) scale(1.3);opacity:.15}60%{transform:translateY(0) scale(.95);opacity:1}100%{transform:none;opacity:1}}
+@keyframes jm-heart{0%,100%{transform:scale(1)}12%{transform:scale(1.14)}24%{transform:scale(1)}36%{transform:scale(1.08)}50%{transform:scale(1)}}
+@keyframes jm-shake{0%,100%{transform:translate(0,0) rotate(0)}20%{transform:translate(-2px,1px) rotate(-2deg)}40%{transform:translate(2px,-1px) rotate(2deg)}60%{transform:translate(-1px,-1px) rotate(-1deg)}80%{transform:translate(1px,1px) rotate(1deg)}}
+@keyframes jm-glow{0%,100%{box-shadow:0 10px 24px rgba(225,29,72,.3)}50%{box-shadow:0 0 0 6px rgba(251,113,133,.35),0 14px 40px rgba(225,29,72,.6)}}
+@keyframes jm-glow-gold{0%,100%{box-shadow:0 12px 28px rgba(234,88,12,.3)}50%{box-shadow:0 0 0 6px rgba(252,211,77,.45),0 14px 40px rgba(245,158,11,.7)}}
+@keyframes jm-countA{0%{transform:scale(1.9);opacity:0}30%{transform:scale(1);opacity:1}100%{transform:scale(.9);opacity:.8}}
+@keyframes jm-countB{0%{transform:scale(1.9);opacity:0}30%{transform:scale(1);opacity:1}100%{transform:scale(.9);opacity:.8}}
+@keyframes jm-fw{0%{transform:translateY(0);opacity:0}5%{opacity:1}60%{opacity:1}100%{transform:translateY(-80px);opacity:0}}
+@keyframes jm-slam{0%{transform:scale(3) rotate(-8deg);opacity:0}60%{transform:scale(.92) rotate(-8deg);opacity:1}100%{transform:scale(1) rotate(-6deg);opacity:1}}
+@keyframes jm-slide{from{background-position:0 0}to{background-position:200% 0}}
+@keyframes jm-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes jm-sheet{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes jm-fall{0%{transform:translateY(-60px) rotate(0);opacity:0}10%{opacity:1}100%{transform:translateY(900px) rotate(540deg);opacity:1}}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<noscript>JackpotMaster a besoin de JavaScript.</noscript>
+<script type="text/x-template" id="tpl">
+<div style="width: 100%; max-width: 480px; margin: 0 auto; height: 100vh; height: 100dvh; box-sizing: border-box; background: linear-gradient(180deg, #FFF1DC 0%, #FFF7EC 30%, #FFFAF3 100%); color: #1E1640; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden; position: relative">
+  <div aria-hidden="true" :style="goldWashStyle"></div>
+
+  <header style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; padding: calc(20px + env(safe-area-inset-top)) 20px 12px">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#F59E0B"/><circle cx="16" cy="16" r="11" fill="none" stroke="#FFF7EC" stroke-width="1.5" stroke-dasharray="2 2.5"/><path d="M16 8l2.3 4.8 5.2.7-3.8 3.6.9 5.2-4.6-2.5-4.6 2.5.9-5.2-3.8-3.6 5.2-.7z" fill="#FFF7EC"/></svg>
+      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.3px">Jackpot<span style="color: #C2410C">Master</span></div>
+    </div>
+    <div :style="badgeStyle">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z"/><path d="M13 6v12" stroke-dasharray="2 2"/></svg>
+      <span>{{ticketsLabel}}</span>
+    </div>
+  </header>
+
+  <template v-if="eventOn">
+    <button type="button" @click="eventGo" :style="eventStyle">
+      <span :style="eventDotStyle"></span>
+      <span style="flex: 1; text-align: left">{{eventText}}</span>
+      <span style="font-family: 'Space Grotesk', sans-serif; font-variant-numeric: tabular-nums; font-size: 15px">{{eventCd}}</span>
+      <span style="position: absolute; top: -10px; bottom: -10px; left: -120px; width: 50px; background: linear-gradient(105deg, transparent, rgba(255,255,255,0.6), transparent); transform: skewX(-20deg); animation: jm-sheen 2.6s ease-in-out infinite"></span>
+    </button>
+  </template>
+
+  <template v-if="onJackpots">
+    <nav aria-label="Les trois jackpots" style="position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 0 20px; padding: 4px; background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 14px">
+      <template v-for="(tab, tab_i) in tabs" :key="tab_i">
+        <button type="button" @click="tab.pick" :style="tab.style">{{tab.label}}</button>
+      </template>
+    </nav>
+  </template>
+
+  <main style="position: relative; z-index: 1; flex: 1; overflow-y: auto; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 16px">
+
+    <template v-if="isSuper">
+      <section style="display: flex; flex-direction: column; gap: 16px">
+        <template v-if="showInstallBanner">
+          <div style="position: relative; overflow: hidden; display: flex; align-items: center; gap: 12px; background: linear-gradient(135deg, #1E1640, #3B2A7A); color: #FFFFFF; border-radius: 18px; padding: 12px 12px 12px 14px; box-shadow: 0 8px 20px rgba(30,22,64,0.25)">
+            <div style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #FDE68A, #F59E0B); display: flex; align-items: center; justify-content: center; animation: jm-float 2.4s ease-in-out infinite"><svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#FFFFFF"/></svg></div>
+            <div style="flex: 1; min-width: 0"><div style="font-size: 15px; font-weight: 700">Installe l'appli</div><div style="font-size: 12px; color: #D6CCF5">Gratuit, 10 secondes, sans passer par un store</div></div>
+            <button type="button" @click="openInstall" style="flex-shrink: 0; min-height: 40px; padding: 0 14px; border: none; border-radius: 999px; background: #FCD34D; color: #1E1640; font-size: 14px; font-weight: 700">Installer</button>
+            <button type="button" @click="hideInstallBanner" aria-label="Fermer" style="flex-shrink: 0; width: 32px; height: 40px; border: none; background: none; color: #D6CCF5; font-size: 20px; padding: 0">×</button>
+            <span style="position: absolute; top: -10px; bottom: -10px; left: -120px; width: 40px; background: linear-gradient(105deg, transparent, rgba(255,255,255,0.25), transparent); transform: skewX(-20deg); animation: jm-sheen 3s ease-in-out infinite; pointer-events: none"></span>
+          </div>
+        </template>
+        <div style="position: relative; overflow: hidden; background: linear-gradient(135deg, #14B8A6 0%, #0369A1 100%); border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; color: #FFFFFF; box-shadow: 0 10px 24px rgba(3,105,161,0.28)">
+          <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true" style="position: absolute; right: -14px; top: -14px; opacity: 0.35"><path d="M60 8l6 22 22 6-22 6-6 22-6-22-22-6 22-6z" fill="#FFFFFF"/><path d="M96 66l3 10 10 3-10 3-3 10-3-10-10-3 10-3z" fill="#FFFFFF"/><circle cx="30" cy="80" r="3" fill="#FFFFFF"/></svg>
+          <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px">Super Jackpot · ce soir 21 h</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; letter-spacing: -1px">{{superAmount}}</div>
+          <div style="font-size: 13px">Un gagnant chaque soir. Chaque pub vue fait grossir le jackpot.</div>
+        </div>
+
+        <div>
+          <div :style="cdSuperLabelStyle">{{cdSuperLabel}}</div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+            <div :style="superBox"><div :style="superNumH">{{cdSuper.h}}</div><div style="font-size: 12px; color: #6B6385">heures</div></div>
+            <div :style="superBox"><div :style="superNumM">{{cdSuper.m}}</div><div style="font-size: 12px; color: #6B6385">minutes</div></div>
+            <div :style="superBox"><div :style="superNumS">{{cdSuper.s}}</div><div style="font-size: 12px; color: #6B6385">secondes</div></div>
+          </div>
+          <template v-if="showDeadline"><div :style="deadlineStyle">{{deadlineText}}</div></template>
+        </div>
+
+        <template v-if="ticketNotClaimed">
+          <button type="button" @click="claimTicket" style="min-height: 58px; border: none; border-radius: 18px; background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%); color: #1E1640; font-size: 17px; font-weight: 700; box-shadow: 0 8px 18px rgba(245,158,11,0.35)">Récupérer mon ticket du jour</button>
+        </template>
+        <template v-if="ticketClaimed">
+          <div style="min-height: 58px; border-radius: 18px; background: #E6F7F5; border: 1.5px solid #14B8A6; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; font-weight: 600; color: #0F5F58">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F766E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+            Ticket du jour récupéré, rendez-vous à 21 h
+          </div>
+        </template>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline">
+            <div style="font-size: 15px; font-weight: 700">Plus de chances ce soir</div>
+            <div style="font-size: 13px; color: #6B6385">{{pubsLeftLabel}}</div>
+          </div>
+          <button type="button" @click="watchAd" :disabled="adDisabled" :style="adButtonStyle">Regarder une pub · +1 ticket</button>
+          <div style="position: relative; overflow: hidden; border-radius: 16px; background: linear-gradient(135deg, #FFFBEB, #FDE68A); border: 1.5px solid #F59E0B; padding: 14px; display: flex; gap: 12px; align-items: center">
+            <div style="position: relative; flex-shrink: 0; width: 76px; height: 46px; border-radius: 8px; background: linear-gradient(135deg, #FEF3C7 0%, #FCD34D 30%, #F59E0B 60%, #D97706 100%); box-shadow: 0 4px 10px rgba(180,83,9,0.35); overflow: hidden; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z" fill="#FFFBEB" stroke="#B45309" stroke-width="1.2"/></svg><span style="position: absolute; top: -10px; bottom: -10px; left: -120px; width: 30px; background: linear-gradient(105deg, transparent, rgba(255,255,255,0.85), transparent); transform: skewX(-20deg); animation: jm-sheen 2.4s ease-in-out infinite"></span></div>
+            <div style="flex: 1; min-width: 0">
+              <div style="font-size: 15px; font-weight: 700; color: #451A03">Ticket d'or</div>
+              <div style="font-size: 12px; color: #78350F; margin-top: 2px">{{goldCardText}}</div>
+              <div style="height: 8px; background: rgba(255,255,255,0.75); border-radius: 999px; overflow: hidden; margin-top: 8px"><div :style="goldBarStyle"></div></div>
+            </div>
+          </div>
+          <template v-if="goldDayReady"><button type="button" @click="activateGoldDay" style="position: relative; overflow: hidden; min-height: 54px; border: none; border-radius: 14px; background: linear-gradient(135deg, #FDE68A, #F59E0B 50%, #FCD34D); color: #451A03; font-size: 16px; font-weight: 700; box-shadow: 0 8px 20px rgba(245,158,11,0.5); animation: jm-wiggle 1.8s ease-in-out infinite">Récupérer mon ticket d'or<span style="position: absolute; top: -20px; bottom: -20px; left: -120px; width: 60px; background: linear-gradient(105deg, transparent, rgba(255,255,255,0.8), transparent); transform: skewX(-20deg); animation: jm-sheen 2.2s ease-in-out infinite"></span></button></template>
+        </div>
+        <div style="border: 1.5px dashed #D9CFE0; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 12px; font-weight: 700; color: #6B6385; text-transform: uppercase; letter-spacing: 1px">Essayer (mode démo)</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+            <button type="button" @click="superDemoGo" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640">{{superDemoLabel}}</button>
+            <button type="button" @click="superLive" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640; background: #1E1640; color: #FFFFFF; border-color: #1E1640">{{superLiveLabel}}</button>
+            <button type="button" @click="superWin" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640">Tirage gagné</button>
+            <button type="button" @click="superLose" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640">Tirage perdu</button>
+            <button type="button" @click="superLate" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640; grid-column: 1 / -1">J'ouvre l'appli après le tirage</button>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <template v-if="isMega">
+      <section style="display: flex; flex-direction: column; gap: 14px">
+        <div :style="megaHeroStyle">
+          <template v-if="megaDay"><div style="position: absolute; right: 16px; top: 16px; z-index: 1; background: #FFFFFF; color: #BE123C; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 999px; animation: jm-heart 1.1s ease-in-out infinite">JOUR J</div></template>
+          <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true" style="position: absolute; right: -14px; top: -14px; opacity: 0.35"><path d="M60 8l6 22 22 6-22 6-6 22-6-22-22-6 22-6z" fill="#FFFFFF"/><path d="M96 66l3 10 10 3-10 3-3 10-3-10-10-3 10-3z" fill="#FFFFFF"/><circle cx="30" cy="80" r="3" fill="#FFFFFF"/></svg>
+          <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px">Méga Jackpot · {{megaMonth}}</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700; letter-spacing: -1px">{{megaAmount}}</div>
+          <div style="font-size: 13px; font-weight: 600">{{megaWhen}}</div>
+        </div>
+
+        <div>
+          <div :style="megaCdLabelStyle">{{megaCdLabel}}</div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+            <div :style="megaBox"><div :style="megaNumD">{{cdMega.d}}</div><div style="font-size: 12px; color: #6B6385">jours</div></div>
+            <div :style="megaBox"><div :style="megaNumH">{{cdMega.h}}</div><div style="font-size: 12px; color: #6B6385">heures</div></div>
+            <div :style="megaBox"><div :style="megaNumM">{{cdMega.m}}</div><div style="font-size: 12px; color: #6B6385">min</div></div>
+            <div :style="megaBox"><div :style="megaNumS">{{cdMega.s}}</div><div style="font-size: 12px; color: #6B6385">s</div></div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline">
+            <div style="font-size: 15px; font-weight: 700">{{megaProgressLabel}}</div>
+            <div :style="`font-size: 13px; font-weight: 600; color: ${megaStatusColor}`">{{megaStatus}}</div>
+          </div>
+          <div style="height: 12px; background: #FFE4E6; border-radius: 999px; overflow: hidden"><div :style="megaBarStyle"></div></div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline"><div style="font-size: 15px; font-weight: 700">Mes places au Méga</div><div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: #BE123C">{{megaTotal}}</div></div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px"><span>Qualification (25 jours)</span><span style="font-weight: 700">{{megaQual}}</span></div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px"><span>Jours bonus au-delà de 25</span><span style="font-weight: 700">{{megaBonus}}</span></div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px"><span>Tickets d'or (10 pubs dans une journée)</span><span style="font-weight: 700">{{megaGold}}</span></div>
+          <div style="font-size: 12px; color: #6B6385">{{megaMax}}</div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; font-size: 11px; color: #6B6385; text-align: center; font-weight: 600">
+            <div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div><div>D</div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px">
+            <template v-for="(day, day_i) in calendar" :key="day_i">
+              <div :style="day.style">{{day.label}}</div>
+            </template>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; font-size: 11px; color: #6B6385; padding-top: 4px">
+            <span style="display: flex; align-items: center; gap: 4px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #E11D48"></span>Présent</span>
+            <span style="display: flex; align-items: center; gap: 4px"><span style="width: 10px; height: 10px; border-radius: 3px; background: linear-gradient(135deg, #FFE4E6, #FFF1F2); border: 1.5px solid #FB7185; box-sizing: border-box"></span>Rattrapé</span>
+            <span style="display: flex; align-items: center; gap: 4px"><span style="width: 10px; height: 10px; border-radius: 3px; border: 1.5px dashed #A79FBF; box-sizing: border-box"></span>Manqué</span>
+          </div>
+        </div>
+
+        <button type="button" @click="startCatchUp" :disabled="catchUpDisabled" :style="catchUpStyle">Rattraper un jour manqué · 3 pubs</button>
+        <div style="font-size: 12px; color: #6B6385; margin-top: -6px">{{catchUpLabel}}</div>
+        <div style="border: 1.5px dashed #D9CFE0; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 12px; font-weight: 700; color: #6B6385; text-transform: uppercase; letter-spacing: 1px">Essayer (mode démo)</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+            <button type="button" @click="megaDemoGo" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640">{{megaDemoLabel}}</button>
+            <button type="button" @click="megaLive" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640; background: #1E1640; color: #FFFFFF; border-color: #1E1640">{{megaLiveLabel}}</button>
+            <button type="button" @click="megaWin" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640">Tirage gagné</button>
+            <button type="button" @click="megaLose" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640">Tirage perdu</button>
+            <button type="button" @click="megaLate" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640; grid-column: 1 / -1">J'ouvre l'appli après le tirage</button>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <template v-if="isMaster">
+      <section style="display: flex; flex-direction: column; gap: 16px">
+        <div :style="masterHeroStyle">
+          <svg width="150" height="150" viewBox="0 0 120 120" aria-hidden="true" style="position: absolute; right: -20px; top: -20px; opacity: 0.45"><path d="M60 8l6 22 22 6-22 6-6 22-6-22-22-6 22-6z" fill="#FFFFFF"/><path d="M96 66l3 10 10 3-10 3-3 10-3-10-10-3 10-3z" fill="#FFFFFF"/><circle cx="30" cy="80" r="3" fill="#FFFFFF"/><circle cx="100" cy="30" r="2" fill="#FFFFFF"/></svg>
+          <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px">JackpotMaster {{masterYearLabel}}</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; letter-spacing: -1px">{{masterAmount}}</div>
+          <div style="font-size: 13px; font-weight: 500">Grand tirage en direct à minuit, le soir du Nouvel An. Un seul gagnant.</div>
+        </div>
+
+        <div>
+          <div :style="masterCdLabelStyle">{{masterCdLabel}}</div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+            <div :style="masterBox"><div :style="masterNumD">{{cdMaster.d}}</div><div style="font-size: 12px; color: #6B6385">jours</div></div>
+            <div :style="masterBox"><div :style="masterNumH">{{cdMaster.h}}</div><div style="font-size: 12px; color: #6B6385">heures</div></div>
+            <div :style="masterBox"><div :style="masterNumM">{{cdMaster.m}}</div><div style="font-size: 12px; color: #6B6385">min</div></div>
+            <div :style="masterBox"><div :style="masterNumS">{{cdMaster.s}}</div><div style="font-size: 12px; color: #6B6385">s</div></div>
+          </div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline">
+            <div style="font-size: 15px; font-weight: 700">{{masterProgressLabel}}</div>
+            <div style="font-size: 13px; color: #6B6385">il en faut 12</div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+            <template v-for="(month, month_i) in months" :key="month_i">
+              <div :style="month.style"><div style="font-size: 13px; font-weight: 700">{{month.label}}</div><div style="font-size: 11px">{{month.state}}</div></div>
+            </template>
+          </div>
+          <div style="font-size: 12px; color: #6B6385">Pour entrer dans le JackpotMaster, il faut réussir les 12 Méga Jackpots de l'année.</div>
+        </div>
+        <div style="border: 1.5px dashed #D9CFE0; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 12px; font-weight: 700; color: #6B6385; text-transform: uppercase; letter-spacing: 1px">Essayer (mode démo)</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+            <button type="button" @click="masterDemoGo" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640">{{masterDemoLabel}}</button>
+            <button type="button" @click="masterLive" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640; background: #1E1640; color: #FFFFFF; border-color: #1E1640">{{masterLiveLabel}}</button>
+            <button type="button" @click="masterWin" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640">Tirage gagné</button>
+            <button type="button" @click="masterLose" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640">Tirage perdu</button>
+            <button type="button" @click="masterLate" style="min-height: 44px; border: 1px solid #E8DCC8; background: #FFFFFF; border-radius: 12px; font-size: 12px; font-weight: 600; color: #1E1640; grid-column: 1 / -1">J'ouvre l'appli après le tirage</button>
+          </div>
+        </div>
+      </section>
+    </template>
+
+    <template v-if="onWinners">
+      <section style="display: flex; flex-direction: column; gap: 16px">
+        <div style="position: relative; overflow: hidden; background: linear-gradient(160deg, #FFFFFF 0%, #FFF1DC 100%); border: 1px solid #F3D9A8; border-radius: 24px; padding: 20px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center">
+          <svg width="110" height="110" viewBox="0 0 120 120" role="img" aria-label="Coupe du JackpotMaster">
+            <path d="M18 8l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#F59E0B"/><path d="M104 20l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#DB2777"/><circle cx="100" cy="70" r="3" fill="#14B8A6"/><circle cx="16" cy="64" r="2.5" fill="#7C3AED"/>
+            <path d="M38 22h44v18c0 14-10 26-22 26S38 54 38 40z" fill="#F59E0B"/>
+            <path d="M44 26h8v14c0 6 3 12 8 15-9-1-16-8-16-17z" fill="#FCD34D"/>
+            <path d="M38 28H26c0 14 6 22 16 24M82 28h12c0 14-6 22-16 24" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+            <rect x="54" y="66" width="12" height="16" fill="#D97706"/>
+            <rect x="40" y="82" width="40" height="10" rx="3" fill="#B45309"/>
+            <rect x="34" y="92" width="52" height="12" rx="4" fill="#92400E"/>
+            <path d="M60 32l3 6 6.5.9-4.7 4.6 1.1 6.5L60 47l-5.9 3 1.1-6.5-4.7-4.6 6.5-.9z" fill="#FFF7EC"/>
+          </svg>
+          <div style="font-size: 12px; font-weight: 700; color: #B45309; text-transform: uppercase; letter-spacing: 1.2px">Gagnante du JackpotMaster 2025</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700">Sarah M., Lyon</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: #C2410C">41 870 €</div>
+          <div style="font-size: 13px; color: #6B6385">12 Méga Jackpots réussis sur 12</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+          <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 16px; padding: 12px; text-align: center"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700">412</div><div style="font-size: 12px; color: #6B6385">gagnants depuis le lancement</div></div>
+          <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 16px; padding: 12px; text-align: center"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700">80 %</div><div style="font-size: 12px; color: #6B6385">des revenus pub reversés</div></div>
+        </div>
+
+        <div role="group" aria-label="Filtrer les gagnants" style="display: flex; gap: 6px; flex-wrap: wrap">
+          <template v-for="(f, f_i) in winnerFilters" :key="f_i">
+            <button type="button" @click="f.pick" :aria-pressed="f.on" :style="f.style">{{f.label}}</button>
+          </template>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 4px 14px">
+          <template v-for="(w, w_i) in winners" :key="w_i">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F5EDE0">
+              <div :style="w.avatarStyle">{{w.initial}}</div>
+              <div style="flex: 1; min-width: 0">
+                <div style="font-size: 15px; font-weight: 700">{{w.name}}</div>
+                <div style="font-size: 12px; color: #6B6385">{{w.city}} · {{w.date}}</div>
+              </div>
+              <div style="text-align: right">
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700">{{w.amount}}</div>
+                <div :style="w.badgeStyle">{{w.jackpot}}</div>
+              </div>
+            </div>
+          </template>
+        </div>
+        <button type="button" @click="shareWin" style="min-height: 52px; border: none; border-radius: 16px; background: #1E1640; color: #FFFFFF; font-size: 15px; font-weight: 600">Partager les gagnants</button>
+      </section>
+    </template>
+
+    <template v-if="onInvite">
+      <section style="display: flex; flex-direction: column; gap: 16px">
+        <div style="position: relative; overflow: hidden; background: linear-gradient(135deg, #DB2777 0%, #F59E0B 100%); border-radius: 24px; padding: 22px 20px; color: #FFFFFF; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 10px 24px rgba(219,39,119,0.25)">
+          <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true" style="position: absolute; right: -14px; top: -14px; opacity: 0.35"><path d="M60 8l6 22 22 6-22 6-6 22-6-22-22-6 22-6z" fill="#FFFFFF"/><path d="M96 66l3 10 10 3-10 3-3 10-3-10-10-3 10-3z" fill="#FFFFFF"/></svg>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.15">Plus on est nombreux, plus le jackpot est gros</div>
+          <div style="font-size: 14px">Gagne 5 tickets bonus pour chaque ami qui joue 7 jours.</div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+          <div style="font-size: 13px; color: #6B6385; font-weight: 600">Ton lien personnel</div>
+          <div style="display: flex; gap: 8px; align-items: center">
+            <div style="flex: 1; min-width: 0; background: #FFF7EC; border: 1px dashed #E8C88E; border-radius: 12px; padding: 12px; font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">jackpotmaster.app/r/CAMILLE7</div>
+            <button type="button" @click="copyLink" style="min-height: 46px; padding: 0 16px; border: none; border-radius: 12px; background: #1E1640; color: #FFFFFF; font-size: 14px; font-weight: 600">Copier</button>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding-top: 4px">
+            <button type="button" @click="shareInvite" style="min-height: 64px; border: 1px solid #F0E4D2; background: #FFFFFF; border-radius: 14px; font-size: 12px; font-weight: 600; color: #1E1640; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><span style="width: 28px; height: 28px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.5A9 9 0 1 1 21 12z"/></svg></span>WhatsApp</button>
+            <button type="button" @click="shareInvite" style="min-height: 64px; border: 1px solid #F0E4D2; background: #FFFFFF; border-radius: 14px; font-size: 12px; font-weight: 600; color: #1E1640; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><span style="width: 28px; height: 28px; border-radius: 50%; background: #111111; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5M14 4c.5 2.5 2.5 4.5 5 5"/></svg></span>TikTok</button>
+            <button type="button" @click="shareInvite" style="min-height: 64px; border: 1px solid #F0E4D2; background: #FFFFFF; border-radius: 14px; font-size: 12px; font-weight: 600; color: #1E1640; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><span style="width: 28px; height: 28px; border-radius: 9px; background: linear-gradient(135deg, #F59E0B, #DB2777, #7C3AED); display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/></svg></span>Insta</button>
+            <button type="button" @click="shareInvite" style="min-height: 64px; border: 1px solid #F0E4D2; background: #FFFFFF; border-radius: 14px; font-size: 12px; font-weight: 600; color: #1E1640; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><span style="width: 28px; height: 28px; border-radius: 50%; background: #0369A1; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg></span>SMS</button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+          <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 16px; padding: 12px 6px; text-align: center"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700">4</div><div style="font-size: 12px; color: #6B6385">amis invités</div></div>
+          <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 16px; padding: 12px 6px; text-align: center"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700">2</div><div style="font-size: 12px; color: #6B6385">ont joué 7 jours</div></div>
+          <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 16px; padding: 12px 6px; text-align: center"><div style="font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: #C2410C">{{friendTickets}}</div><div style="font-size: 12px; color: #6B6385">tickets récupérés</div></div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 4px 14px">
+          <template v-for="(fr, fr_i) in friends" :key="fr_i">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #F5EDE0">
+              <div style="width: 38px; height: 38px; border-radius: 50%; background: #FCE7F3; color: #9D174D; display: flex; align-items: center; justify-content: center; font-weight: 700">{{fr.initial}}</div>
+              <div style="flex: 1">
+                <div style="font-size: 15px; font-weight: 600">{{fr.name}}</div>
+                <div style="font-size: 12px; color: #6B6385">{{fr.detail}}</div>
+              </div>
+              <template v-if="fr.canClaim"><button type="button" @click="fr.claim" style="min-height: 40px; padding: 0 14px; border: none; border-radius: 999px; background: linear-gradient(135deg, #FCD34D, #F59E0B); color: #1E1640; font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(245,158,11,0.4); animation: jm-wiggle 1.8s ease-in-out infinite">Récupérer +5</button></template><template v-if="fr.showBadge"><div :style="fr.badgeStyle">{{fr.badge}}</div></template>
+            </div>
+          </template>
+        </div>
+      </section>
+    </template>
+
+    <template v-if="onAccount">
+      <section style="display: flex; flex-direction: column; gap: 16px">
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 20px; padding: 18px; display: flex; align-items: center; gap: 14px">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #FCD34D, #F59E0B); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700">CD</div>
+          <div style="flex: 1">
+            <div style="font-size: 18px; font-weight: 700">Camille D.</div>
+            <div style="font-size: 13px; color: #6B6385">Joueuse depuis janvier 2026 · série de 6 jours</div>
+          </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #14B8A6 0%, #0369A1 100%); color: #FFFFFF; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 4px">
+          <div style="font-size: 13px; font-weight: 600">Mes gains</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 34px; font-weight: 700">138,40 €</div>
+          <div style="font-size: 13px">Super Jackpot du 14 octobre · virement reçu le 18 octobre</div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 4px 16px">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #F5EDE0"><div><div style="font-size: 15px; font-weight: 600">Identité</div><div style="font-size: 12px; color: #6B6385">Vérifiée, 18 ans et plus</div></div><div style="font-size: 13px; font-weight: 700; color: #0F766E">Vérifiée</div></div>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #F5EDE0"><div><div style="font-size: 15px; font-weight: 600">Compte bancaire (RIB)</div><div style="font-size: 12px; color: #6B6385">FR76 •••• •••• 4821</div></div><button type="button" @click="soon" style="min-height: 40px; border: none; background: none; color: #B45309; font-size: 14px; font-weight: 600">Modifier</button></div>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0"><div><div style="font-size: 15px; font-weight: 600">Téléphone</div><div style="font-size: 12px; color: #6B6385">06 •• •• •• 42</div></div><div style="font-size: 13px; font-weight: 700; color: #0F766E">Vérifié</div></div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 4px 16px">
+          <div style="font-size: 13px; font-weight: 700; color: #6B6385; padding: 14px 0 4px; text-transform: uppercase; letter-spacing: 1px">Notifications</div>
+          <template v-for="(n, n_i) in notifs" :key="n_i">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #F5EDE0; gap: 12px">
+              <div><div style="font-size: 15px; font-weight: 600">{{n.label}}</div><div style="font-size: 12px; color: #6B6385">{{n.detail}}</div></div>
+              <button type="button" @click="n.toggle" :aria-pressed="n.on" :aria-label="n.label" :style="n.trackStyle"><span :style="n.knobStyle"></span></button>
+            </div>
+          </template>
+          <div style="height: 8px"></div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+          <div style="font-size: 15px; font-weight: 600">Langue</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 4px; background: #FFF7EC; border-radius: 12px">
+            <button type="button" @click="setFr" :aria-pressed="langFr" :style="frStyle">Français</button>
+            <button type="button" @click="setEn" :aria-pressed="langEn" :style="enStyle">English</button>
+          </div>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 18px; padding: 4px 16px">
+          <button type="button" @click="openInstall" style="width: 100%; display: flex; justify-content: space-between; align-items: center; min-height: 48px; border: none; border-bottom: 1px solid #F5EDE0; background: none; padding: 0; color: #1E1640; font-size: 15px; font-weight: 600; text-align: left">{{installRowLabel}}<span style="color: #6B6385">›</span></button>
+          <a href="#" @click.prevent="soon" style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; text-decoration: none; color: #1E1640; font-size: 15px; font-weight: 600; border-bottom: 1px solid #F5EDE0">Règlement<span style="color: #6B6385">›</span></a>
+          <a href="#" @click.prevent="soon" style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; text-decoration: none; color: #1E1640; font-size: 15px; font-weight: 600; border-bottom: 1px solid #F5EDE0">Aide et contact<span style="color: #6B6385">›</span></a>
+          <a href="#" @click.prevent="soon" style="display: flex; justify-content: space-between; align-items: center; min-height: 48px; text-decoration: none; color: #1E1640; font-size: 15px; font-weight: 600; border-bottom: 1px solid #F5EDE0">Jouer de façon responsable<span style="color: #6B6385">›</span></a>
+          <button type="button" style="width: 100%; min-height: 48px; border: none; background: none; text-align: left; padding: 0; color: #B91C1C; font-size: 15px; font-weight: 600" @click="resetDemo">Remettre la démo à zéro</button>
+        </div>
+      </section>
+    </template>
+
+    <div style="font-size: 11px; color: #6B6385; text-align: center">Version test : pubs, gains, gagnants et montants sont fictifs. Rien n'est réel, aucun argent en jeu. Jeu réservé aux 18 ans et plus.</div>
+  </main>
+
+  <nav aria-label="Menu principal" style="position: relative; z-index: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #F0E4D2; background: #FFFFFF; padding: 8px 8px calc(14px + env(safe-area-inset-bottom)); box-shadow: 0 -4px 16px rgba(180,120,40,0.08)">
+    <button type="button" @click="goJackpots" :aria-current="curJackpots" :style="navJackpots"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6.5l1.7 3.5 3.8.5-2.8 2.7.7 3.8-3.4-1.8-3.4 1.8.7-3.8-2.8-2.7 3.8-.5z"/></svg>Jackpots</button>
+    <button type="button" @click="goWinners" :aria-current="curWinners" :style="navWinners"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>Gagnants</button>
+    <button type="button" @click="goInvite" :aria-current="curInvite" :style="navInvite"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M19 8v6M16 11h6"/></svg>Inviter</button>
+    <button type="button" @click="goAccount" :aria-current="curAccount" :style="navAccount"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg>Compte</button>
+  </nav>
+
+  <template v-if="adPlaying">
+    <div role="dialog" aria-label="Publicité en cours" style="position: absolute; inset: 0; z-index: 10; background: rgba(20,14,40,0.92); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 32px; color: #FFFFFF">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #E5E0F5">Publicité</div>
+      <div style="width: 300px; height: 170px; border-radius: 16px; background: #2A2150; border: 1px dashed #6B5FA6; display: flex; align-items: center; justify-content: center; color: #E5E0F5; font-size: 14px">[Vidéo de l'annonceur]</div>
+      <div style="width: 300px; height: 6px; background: #3A3066; border-radius: 999px; overflow: hidden"><div :style="adBarStyle"></div></div>
+      <div style="font-size: 14px">{{adLabel}}</div>
+    </div>
+  </template>
+
+  <template v-if="installOpen">
+    <div style="position: absolute; inset: 0; z-index: 17; background: rgba(30,22,64,0.45); animation: jm-fade 0.25s ease-out" @click="closeInstall"></div>
+    <div role="dialog" aria-label="Installer l'appli" style="position: absolute; z-index: 18; left: 0; right: 0; bottom: 0; background: #FFFAF3; border-radius: 26px 26px 0 0; padding: 12px 20px 28px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 -10px 30px rgba(30,22,64,0.25); animation: jm-sheet 0.35s cubic-bezier(.2,1,.3,1)">
+      <div style="align-self: center; width: 44px; height: 5px; border-radius: 999px; background: #E8DCC8"></div>
+      <div style="display: flex; align-items: center; gap: 12px">
+        <div style="flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, #FDE68A, #F59E0B); display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px rgba(245,158,11,0.4)"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 6l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#FFFFFF"/></svg></div>
+        <div><div style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 700">Installer JackpotMaster</div><div style="font-size: 13px; color: #6B6385">L'appli sur ton écran d'accueil, avec les notifications des tirages</div></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 4px; background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 12px">
+        <button type="button" @click="pickIphone" :style="iphoneTabStyle">iPhone</button>
+        <button type="button" @click="pickAndroid" :style="androidTabStyle">Android</button>
+      </div>
+      <template v-if="installIphone">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+              <div style="display: flex; gap: 12px; align-items: center; animation: jm-rise 0.4s ease-out 0.25s both"><div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: #1E1640; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-weight: 700; display: flex; align-items: center; justify-content: center">1</div><div style="flex: 1; font-size: 15px">Dans Safari, touche le bouton <b>Partager</b> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: -3px"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg> en bas de l'écran</div></div>
+              <div style="display: flex; gap: 12px; align-items: center; animation: jm-rise 0.4s ease-out 0.4s both"><div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: #1E1640; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-weight: 700; display: flex; align-items: center; justify-content: center">2</div><div style="flex: 1; font-size: 15px">Fais défiler et choisis <b>Sur l'écran d'accueil</b> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E1640" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="vertical-align: -3px"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg></div></div>
+              <div style="display: flex; gap: 12px; align-items: center; animation: jm-rise 0.4s ease-out 0.5499999999999999s both"><div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: #1E1640; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-weight: 700; display: flex; align-items: center; justify-content: center">3</div><div style="flex: 1; font-size: 15px">Touche <b>Ajouter</b> en haut à droite. C'est fini !</div></div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; color: #0A84FF; font-size: 12px; font-weight: 700; animation: jm-bob 1.2s ease-in-out infinite">Le bouton Partager est par ici<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A84FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"/></svg></div>
+          <button type="button" @click="installDone" style="min-height: 52px; border: none; border-radius: 16px; background: #1E1640; color: #FFFFFF; font-size: 16px; font-weight: 700">C'est fait !</button>
+        </div>
+      </template>
+      <template v-if="installAndroid">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <div style="font-size: 15px; animation: jm-rise 0.4s ease-out both">Sur Android, c'est en un seul clic : touche le bouton, puis <b>Installer</b> dans la fenêtre qui s'ouvre.</div>
+          <button type="button" @click="installDone" style="min-height: 56px; border: none; border-radius: 16px; background: linear-gradient(135deg, #FCD34D, #F59E0B); color: #1E1640; font-size: 17px; font-weight: 700; box-shadow: 0 8px 18px rgba(245,158,11,0.4); animation: jm-wiggle 2s ease-in-out infinite">Installer l'appli</button>
+          <div style="font-size: 12px; color: #6B6385">Sinon : menu ⋮ de Chrome, puis « Installer l'application ».</div>
+        </div>
+      </template>
+    </div>
+  </template>
+
+  <template v-if="goldOpen">
+    <div role="dialog" aria-label="Animation en or" style="position: absolute; inset: 0; z-index: 15; background: radial-gradient(circle at 50% 40%, #3B2A6B 0%, #1C1538 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; overflow: hidden; animation: jm-fade 0.4s ease-out">
+      <div aria-hidden="true" style="position: absolute; left: 50%; top: 40%; width: 760px; height: 760px; margin: -380px 0 0 -380px; border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(252,211,77,0.20) 0deg 8deg, transparent 8deg 18deg); -webkit-mask-image: radial-gradient(circle, #000 12%, transparent 62%); mask-image: radial-gradient(circle, #000 12%, transparent 62%); animation: jm-spin 18s linear infinite"></div>
+      <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none"><template v-for="(c, c_i) in coins" :key="c_i"><span :style="c.style"></span></template></div>
+      <div style="position: relative; width: 280px; height: 140px; perspective: 900px">
+        <template v-for="(sp, sp_i) in sparkles" :key="sp_i"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" :style="sp.style"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5z" fill="#FDE68A"/></svg></template>
+        <div style="animation: jm-float 2.6s ease-in-out 1.6s infinite">
+          <div style="position: relative; width: 280px; height: 140px; border-radius: 18px; background: linear-gradient(135deg, #FEF3C7 0%, #FCD34D 25%, #F59E0B 55%, #FDE68A 75%, #D97706 100%); box-shadow: 0 0 0 3px #FDE68A, 0 18px 50px rgba(245,158,11,0.6); overflow: hidden; animation: jm-gold-in 1.5s cubic-bezier(.2,.8,.3,1) both">
+            <span style="position: absolute; left: -14px; top: 56px; width: 28px; height: 28px; border-radius: 50%; background: #33265F"></span>
+            <span style="position: absolute; right: -14px; top: 56px; width: 28px; height: 28px; border-radius: 50%; background: #33265F"></span>
+            <span style="position: absolute; left: 200px; top: 14px; bottom: 14px; border-left: 2px dashed rgba(120,53,15,0.45)"></span>
+            <div style="position: absolute; left: 24px; top: 22px; color: #78350F"><div style="font-size: 10px; font-weight: 700; letter-spacing: 2px">MÉGA JACKPOT · {{megaMonthUp}}</div><div style="font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; color: #451A03; margin-top: 6px">{{goldTicketName}}</div><div style="font-size: 12px; font-weight: 600; margin-top: 6px">N° {{goldNumber}} · tirage le {{megaDateLabel}} à 21 h 30</div></div>
+            <div style="position: absolute; left: 200px; right: 0; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center"><svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z" fill="#FFFBEB" stroke="#B45309" stroke-width="1.2"/></svg></div>
+            <span style="position: absolute; top: -20px; bottom: -20px; left: -120px; width: 80px; background: linear-gradient(105deg, transparent, rgba(255,255,255,0.85), transparent); transform: skewX(-20deg); animation: jm-sheen 2.6s ease-in-out 1.3s infinite"></span>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative; text-align: center; padding: 0 24px; animation: jm-rise 0.6s ease-out 1.1s both">
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 34px; font-weight: 700; background: linear-gradient(90deg, #FDE68A, #F59E0B, #FDE68A); -webkit-background-clip: text; background-clip: text; color: transparent">{{goldTitle}}</div>
+        <div style="font-size: 15px; color: #F5F0FF; margin-top: 6px">{{goldSub}}</div>
+        <div style="font-size: 13px; color: #D6CCF5; margin-top: 4px">{{goldCountLabel}}</div>
+      </div>
+      <button type="button" @click="closeGold" style="position: relative; min-height: 52px; padding: 0 40px; border: none; border-radius: 999px; background: linear-gradient(135deg, #FCD34D, #F59E0B); color: #1E1640; font-size: 16px; font-weight: 700; box-shadow: 0 8px 22px rgba(245,158,11,0.5); animation: jm-rise 0.6s ease-out 1.4s both">Génial !</button>
+    </div>
+  </template>
+
+  <template v-if="drawOpen">
+    <div role="dialog" :aria-label="drawAria" :style="drawBgStyle">
+      <template v-if="showFireworks">
+        <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none"><template v-for="(f, f_i) in fireworks" :key="f_i"><span :style="f.outer"><span :style="f.inner"></span></span></template></div>
+      </template>
+      <template v-if="drawLateOn">
+        <div style="position: absolute; z-index: 2; top: 22px; left: 0; right: 0; display: flex; justify-content: center"><div style="font-size: 12px; font-weight: 700; letter-spacing: 0.5px; padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.3)">{{drawLateText}}</div></div>
+      </template>
+      <template v-if="drawCountdown">
+        <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 28px; text-align: center">
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #FDE68A">{{drawCountEyebrow}}</div>
+          <div :style="`font-size: 16px; color: ${drawSoft}`">{{drawCountSub}}</div>
+          <div :style="drawCountStyle">{{drawCountNum}}</div>
+          <div :style="`font-size: 14px; color: ${drawSoft}`">{{drawAmountLabel}} en jeu</div>
+        </div>
+      </template>
+      <template v-if="drawNewYear">
+        <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 28px; text-align: center">
+          <div style="font-size: 14px; font-weight: 700; letter-spacing: 4px; color: #FDE68A; animation: jm-rise 0.5s ease-out both">MINUIT !</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; line-height: 1.05; background: linear-gradient(90deg, #FDE68A, #F59E0B, #FDE68A); -webkit-background-clip: text; background-clip: text; color: transparent; animation: jm-pop-in 0.8s cubic-bezier(.2,1.6,.4,1) both">Bonne année {{newYear}} !</div>
+          <div style="font-size: 15px; color: #E0E7FF; animation: jm-rise 0.5s ease-out 0.7s both">Le tirage du JackpotMaster commence…</div>
+        </div>
+      </template>
+      <template v-if="drawRolling">
+        <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 28px">
+          <div style="font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #FDE68A">{{drawEyebrow}}</div>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 44px; font-weight: 700">{{drawAmountLabel}}</div>
+          <div style="position: relative; width: 190px; height: 190px; display: flex; align-items: center; justify-content: center">
+            <div :style="ringOuter"></div>
+            <div :style="ringInner"></div>
+            <div style="text-align: center"><div :style="`font-size: 11px; color: ${drawSoft}; letter-spacing: 1.5px; font-weight: 700`">TICKET N°</div><div style="font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums">{{rollNumber}}</div></div>
+          </div>
+          <div style="font-size: 17px; font-weight: 700; animation: jm-pulse 0.8s ease-in-out infinite">{{drawRollingText}}</div>
+          <div :style="`font-size: 13px; color: ${drawSoft}`">{{drawTicketsLabel}}</div>
+        </div>
+      </template>
+      <template v-if="drawWin">
+        <div style="position: absolute; inset: 0">
+          <div aria-hidden="true" style="position: absolute; left: 50%; top: 36%; width: 800px; height: 800px; margin: -400px 0 0 -400px; border-radius: 50%; background: repeating-conic-gradient(from 0deg, rgba(252,211,77,0.22) 0deg 8deg, transparent 8deg 18deg); -webkit-mask-image: radial-gradient(circle, #000 10%, transparent 62%); mask-image: radial-gradient(circle, #000 10%, transparent 62%); animation: jm-spin 16s linear infinite"></div>
+          <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none"><template v-for="(c, c_i) in coins" :key="c_i"><span :style="c.style"></span></template></div>
+          <div aria-hidden="true" style="position: absolute; left: 50%; top: 34%; width: 0; height: 0; transform: scale(2.4)"><template v-for="(p, p_i) in particles" :key="p_i"><span :style="p.style"></span></template></div>
+          <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 28px; text-align: center">
+            <svg width="96" height="96" viewBox="0 0 120 120" aria-hidden="true" style="animation: jm-pop-in 0.7s cubic-bezier(.2,1.6,.4,1) both"><path d="M38 22h44v18c0 14-10 26-22 26S38 54 38 40z" fill="#F59E0B"/><path d="M44 26h8v14c0 6 3 12 8 15-9-1-16-8-16-17z" fill="#FCD34D"/><path d="M38 28H26c0 14 6 22 16 24M82 28h12c0 14-6 22-16 24" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/><rect x="54" y="66" width="12" height="16" fill="#D97706"/><rect x="40" y="82" width="40" height="10" rx="3" fill="#B45309"/><rect x="34" y="92" width="52" height="12" rx="4" fill="#92400E"/><path d="M60 32l3 6 6.5.9-4.7 4.6 1.1 6.5L60 47l-5.9 3 1.1-6.5-4.7-4.6 6.5-.9z" fill="#FFF7EC"/></svg>
+            <template v-if="drawBigWin"><div :style="drawBadgeStyle">{{drawBadge}}</div></template>
+            <div style="font-size: 14px; font-weight: 700; letter-spacing: 3px; color: #FDE68A; animation: jm-rise 0.5s ease-out 0.2s both">FÉLICITATIONS</div>
+            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; animation: jm-pop-in 0.7s cubic-bezier(.2,1.6,.4,1) 0.3s both">Tu as gagné !</div>
+            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 54px; font-weight: 700; color: #FCD34D; text-shadow: 0 6px 30px rgba(252,211,77,0.6); font-variant-numeric: tabular-nums; animation: jm-pulse 1.2s ease-in-out 1.8s infinite">{{winAmount}}</div>
+            <div :style="`font-size: 14px; color: ${drawSoft}; animation: jm-rise 0.5s ease-out 1s both`">{{drawWinSub}}</div>
+            <button type="button" @click="collectWin" style="min-height: 56px; padding: 0 36px; border: none; border-radius: 999px; background: linear-gradient(135deg, #FCD34D, #F59E0B); color: #1E1640; font-size: 17px; font-weight: 700; box-shadow: 0 8px 24px rgba(245,158,11,0.55); animation: jm-rise 0.5s ease-out 1.6s both">Récupérer mon gain</button>
+          </div>
+        </div>
+      </template>
+      <template v-if="drawLose">
+        <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 28px; text-align: center; animation: jm-drop 0.6s ease-out both">
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" :stroke="drawSoft" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z"/><path d="M13 6v12" stroke-dasharray="2 2"/></svg>
+          <div style="font-family: 'Space Grotesk', sans-serif; font-size: 30px; font-weight: 700">Pas cette fois…</div>
+          <div :style="`font-size: 15px; color: ${drawSoft}; max-width: 300px`">{{drawLoseIntro}}</div>
+          <div style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 310px; box-sizing: border-box">
+            <div style="font-size: 15px; font-weight: 700">{{drawLoseNext}}</div>
+            <div :style="`font-size: 13px; color: ${drawSoft}`">{{drawLoseHint}}</div>
+          </div>
+          <button type="button" @click="closeDraw" :style="drawLoseBtnStyle">{{drawLoseBtn}}</button>
+        </div>
+      </template>
+    </div>
+  </template>
+
+  <template v-if="burstVisible">
+    <div aria-hidden="true" style="position: absolute; z-index: 20; left: 50%; top: 42%; width: 0; height: 0; pointer-events: none">
+      <span style="position: absolute; left: -30px; top: -30px; width: 60px; height: 60px; border-radius: 50%; border: 4px solid #F59E0B; box-sizing: border-box; animation: jm-ring 0.8s ease-out forwards"></span>
+      <template v-for="(p, p_i) in particles" :key="p_i"><span :style="p.style"></span></template>
+      <div style="position: absolute; left: -150px; top: -30px; width: 300px; display: flex; justify-content: center; animation: jm-plus 1.3s ease-out forwards"><span :style="burstStyle">{{burstLabel}}</span></div>
+    </div>
+  </template>
+
+  <template v-if="toastVisible">
+    <div role="status" style="position: absolute; z-index: 30; left: 20px; right: 20px; bottom: 92px; background: #1E1640; color: #FFFFFF; border-radius: 14px; padding: 14px 16px; font-size: 14px; font-weight: 600; text-align: center; box-shadow: 0 10px 24px rgba(30,22,64,0.3)">{{toast}}</div>
+  </template>
+</div>
+</script>
+<script src="vue.global.prod.js"></script>
+<script>
+
+window.jmStandalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); window.jmInstallPrompt = e; });
+class DCLogic {
+  constructor(props) { this.props = props || {}; }
+  setState(patch) { Object.assign(this.state, patch); }
+}
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nav: 'jackpots',
+      page: 0,
+      now: Date.now(),
+      claimed: false,
+      pubs: 0,
+      adTickets: 0,
+      superAmt: 143.82,
+      megaAmt: 2704.1,
+      masterAmt: 45362.4,
+      adPlaying: false,
+      adProgress: 0,
+      adMode: 'ticket',
+      adsLeft: 0,
+      missed: [4, 11, 17].filter((d) => d < new Date().getDate()),
+      caughtUp: [],
+      filter: 'all',
+      notifReminder: true,
+      notifResults: true,
+      notifWinners: false,
+      lang: 'fr',
+      displayTickets: 0,
+      stepAt: 0,
+      burstUntil: 0,
+      burstLabel: '',
+      popUntil: 0,
+      claimedFriends: [],
+      friendBonus: 0,
+      goldShowAt: 0,
+      demoOffset: 0,
+      demoMode: '',
+      autoDone: '',
+      installOpen: false,
+      installOs: /android/i.test(navigator.userAgent) ? 'android' : 'iphone',
+      installed: window.jmStandalone,
+      installBannerHidden: false,
+      drawLate: false,
+      drawKind: 'super',
+      drawOpen: false,
+      drawResult: 'win',
+      drawStart: 0,
+      drawAmount: 0,
+      goldOpen: false,
+      goldMode: 'ticket',
+      goldDayClaimed: false,
+      burstKind: 'gold',
+      toast: '',
+      toastUntil: 0
+    };
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(() => this.tick(), 125);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  markInstalled() {
+    this.setState({ installOpen: false, installed: true, burstUntil: Date.now() + 1300, burstLabel: 'Appli installée !', burstKind: 'gold', toast: 'JackpotMaster est sur ton écran d’accueil', toastUntil: Date.now() + 2800 });
+  }
+
+  say(text) {
+    this.setState({ toast: text, toastUntil: Date.now() + 2500 });
+  }
+
+  tick() {
+    const s = this.state;
+    const t = Date.now();
+    const target = (s.claimed ? 1 : 0) + s.adTickets + s.friendBonus;
+    const next = { now: t, superAmt: s.superAmt + 0.005, megaAmt: s.megaAmt + 0.005, masterAmt: s.masterAmt + 0.005 };
+    if (s.goldShowAt && s.goldShowAt <= t) { next.goldShowAt = 0; next.goldOpen = true; }
+    this.autoLaunch(s, t, next);
+    if (s.displayTickets < target && s.stepAt <= t) { next.displayTickets = s.displayTickets + 1; next.stepAt = t + 220; }
+    if (s.adPlaying) {
+      const p = s.adProgress + 0.125 / 3;
+      if (p >= 1) {
+        this.finishAd(next);
+        return;
+      }
+      next.adProgress = p;
+    }
+    this.setState(next);
+  }
+
+  finishAd(next) {
+    const s = this.state;
+    next.pubs = s.pubs + 1;
+    next.superAmt = next.superAmt + 0.25;
+    next.megaAmt = next.megaAmt + 0.15;
+    next.masterAmt = next.masterAmt + 0.2;
+    if (s.adMode === 'ticket') {
+      next.adTickets = s.adTickets + 1;
+      next.adPlaying = false;
+      next.adProgress = 0;
+      next.toast = next.pubs >= 10 ? 'Ticket d’or débloqué : touche le bouton doré' : '+1 ticket pour ce soir, et le jackpot a grossi';
+      next.burstUntil = Date.now() + 1300;
+      next.burstLabel = next.pubs >= 10 ? 'Ticket d’or !' : '+1 ticket';
+      next.burstKind = 'gold';
+      next.popUntil = Date.now() + 700;
+      next.toastUntil = Date.now() + 2500;
+    } else {
+      const left = s.adsLeft - 1;
+      if (left > 0) {
+        next.adsLeft = left;
+        next.adProgress = 0;
+      } else {
+        const day = s.missed.find((d) => s.caughtUp.indexOf(d) < 0);
+        next.caughtUp = s.caughtUp.concat([day]);
+        next.adsLeft = 0;
+        next.adPlaying = false;
+        next.adProgress = 0;
+        next.toast = 'Le ' + day + ' est rattrapé pour le Méga Jackpot';
+        next.burstUntil = Date.now() + 1300;
+        next.burstLabel = 'Jour rattrapé';
+        next.burstKind = 'mega';
+        next.toastUntil = Date.now() + 2800;
+      }
+    }
+    this.setState(next);
+  }
+
+  targets(now) {
+    const sup = new Date(now); sup.setHours(21, 0, 0, 0);
+    if (sup <= now) sup.setDate(sup.getDate() + 1);
+    let mega = new Date(now.getFullYear(), now.getMonth() + 1, 0, 21, 30, 0);
+    if (mega <= now) mega = new Date(now.getFullYear(), now.getMonth() + 2, 0, 21, 30, 0);
+    const master = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0);
+    return { super: sup, mega: mega, master: master };
+  }
+
+  autoLaunch(s, t, next) {
+    if (s.drawOpen) return;
+    const now = new Date(t + s.demoOffset);
+    const tg = this.targets(now);
+    const past = this.targets(new Date(now.getTime() - 10500));
+    const kinds = ['master', 'mega', 'super'];
+    for (let i = 0; i < kinds.length; i++) {
+      const k = kinds[i];
+      // Master : le décompte finit à minuit pile. Super et Méga : il commence à l'heure limite, le tirage a lieu 10 s après.
+      const target = k === 'master' ? tg[k] : past[k];
+      const left = k === 'master' ? target - now : (target.getTime() + 10000) - now;
+      const key = k + target.getTime();
+      if (left > 0 && left <= 10000 && s.autoDone !== key) {
+        next.autoDone = key;
+        const hasTicket = k === 'super' ? s.claimed : (s.demoMode === k + 'Live' || (k === 'mega' && this.megaQualified));
+        if (!hasTicket) {
+          if (k === 'super') { next.toast = 'Le tirage de 21 h commence. Pas de ticket ce soir : à demain !'; next.toastUntil = t + 3500; }
+          return;
+        }
+        next.drawOpen = true; next.drawKind = k; next.drawLate = false;
+        next.drawResult = Math.random() < 0.5 ? 'win' : 'lose';
+        next.drawStart = t - (10000 - left);
+        next.drawAmount = k === 'super' ? s.superAmt : (k === 'mega' ? s.megaAmt : s.masterAmt);
+        return;
+      }
+    }
+  }
+
+  pad(n) {
+    return String(n).padStart(2, '0');
+  }
+
+  split(ms) {
+    const t = Math.max(0, Math.floor(ms / 1000));
+    return { d: String(Math.floor(t / 86400)), h: this.pad(Math.floor((t % 86400) / 3600)), m: this.pad(Math.floor((t % 3600) / 60)), s: this.pad(t % 60) };
+  }
+
+  money(v, decimals) {
+    return v.toLocaleString('fr-FR', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + ' €';
+  }
+
+  renderVals() {
+    const s = this.state;
+    const now = new Date(s.now + s.demoOffset);
+
+    const tSuper = new Date(now);
+    tSuper.setHours(21, 0, 0, 0);
+    if (tSuper <= now) tSuper.setDate(tSuper.getDate() + 1);
+    let tMega = new Date(now.getFullYear(), now.getMonth() + 1, 0, 21, 30, 0);
+    if (tMega <= now) tMega = new Date(now.getFullYear(), now.getMonth() + 2, 0, 21, 30, 0);
+    const tMaster = new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0);
+    const cdMega = this.split(tMega - now);
+    const cdMasterV = this.split(tMaster - now);
+    const cdSuperV = this.split(tSuper - now);
+    const megaLeft = tMega - now;
+    const masterLeft = tMaster - now;
+    const megaDay = megaLeft < 86400000;
+    const masterDay = masterLeft < 86400000;
+    const frMonths = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+    const megaMonth = frMonths[tMega.getMonth()];
+    const tMegaNext = new Date(tMega.getFullYear(), tMega.getMonth() + 2, 0, 21, 30, 0);
+
+    const onJackpots = s.nav === 'jackpots';
+    const tabStyle = (on, color, hot) => 'min-height: 44px; border: none; border-radius: 10px; font-size: 13px; font-weight: 700; padding: 0 2px; ' + (on ? 'background: ' + color + '; color: #FFFFFF;' : (hot ? 'background: transparent; color: ' + color + '; animation: jm-heart 1.1s ease-in-out infinite;' : 'background: transparent; color: #6B6385;'));
+    const tabs = [
+      { label: 'Super', style: tabStyle(s.page === 0, '#0369A1', false), pick: () => this.setState({ page: 0 }) },
+      { label: 'Méga', style: tabStyle(s.page === 1, '#BE123C', megaDay), pick: () => this.setState({ page: 1 }) },
+      { label: 'Master', style: tabStyle(s.page === 2, '#C2410C', masterDay), pick: () => this.setState({ page: 2 }) }
+    ];
+
+    const pubsLeft = 10 - s.pubs;
+    const adDisabled = pubsLeft <= 0 || s.adPlaying;
+    const adButtonStyle = 'min-height: 52px; border-radius: 14px; font-size: 16px; font-weight: 700; ' + (adDisabled ? 'background: #F1ECE4; color: #6B6385; border: none;' : 'background: #E0F2FE; color: #075985; border: 1.5px solid #0369A1;');
+
+    const today = now.getDate(); const dim = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    const base = 'height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; box-sizing: border-box;';
+    const calendar = [];
+    const lead = (new Date(now.getFullYear(), now.getMonth(), 1).getDay() + 6) % 7; for (let i = 0; i < lead; i++) calendar.push({ label: '', style: base });
+    let present = 0;
+    for (let d = 1; d <= dim; d++) {
+      let style;
+      const isMissed = s.missed.indexOf(d) >= 0;
+      const isCaught = s.caughtUp.indexOf(d) >= 0;
+      if (d < today && !isMissed) { style = base + 'background: #E11D48; color: #FFFFFF;'; present++; }
+      else if (d < today && isCaught) { style = base + 'background: linear-gradient(135deg, #FFE4E6, #FFF1F2); border: 1.5px solid #FB7185; color: #9F1239; font-family: "Space Grotesk", sans-serif; font-weight: 700; box-shadow: inset 0 0 0 2px #FFFFFF;'; present++; }
+      else if (d < today) { style = base + 'border: 1.5px dashed #A79FBF; color: #6B6385;'; }
+      else if (d === today && s.claimed) { style = base + 'background: #E11D48; color: #FFFFFF; outline: 2px solid #F59E0B; outline-offset: 1px;'; present++; }
+      else if (d === today) { style = base + 'border: 2px solid #F59E0B; color: #1E1640;'; }
+      else { style = base + 'background: #FBF8F3; color: #6B6385;'; }
+      calendar.push({ label: String(d), style: style });
+    }
+    const goal = 25;
+    const pct = Math.min(100, Math.round((present / goal) * 100));
+    const qualified = present >= goal;
+    const catchUpLeft = 5 - s.caughtUp.length;
+    const missedLeft = s.missed.length - s.caughtUp.length;
+    const catchUpDisabled = s.adPlaying || missedLeft <= 0 || catchUpLeft <= 0 || pubsLeft < 3;
+    const catchUpStyle = 'min-height: 52px; border-radius: 14px; font-size: 16px; font-weight: 700; ' + (catchUpDisabled ? 'background: #F1ECE4; color: #6B6385; border: none;' : 'background: linear-gradient(135deg, #E11D48, #9F1239); color: #FFFFFF; border: none;');
+
+    const monthNames = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+    const mBase = 'border-radius: 12px; padding: 8px 0; text-align: center; display: flex; flex-direction: column; gap: 2px;';
+    const months = monthNames.map((name, i) => {
+      const cm = now.getMonth(); if (i < cm) return { label: name, state: 'réussi', style: mBase + 'background: linear-gradient(135deg, #FCD34D, #F59E0B); color: #1E1640;' };
+      if (i === cm) return { label: name, state: present + '/25', style: mBase + 'border: 2px solid #F59E0B; color: #1E1640;' };
+      return { label: name, state: 'à venir', style: mBase + 'border: 1.5px dashed #D9CFE0; color: #6B6385;' };
+    });
+
+    const jpColors = { Super: ['#E0F2FE', '#075985'], 'Méga': ['#FFE4E6', '#9F1239'], Master: ['#FEF3C7', '#92400E'] };
+    const allWinners = [
+      { name: 'Karim B.', city: 'Marseille', date: 'hier', amount: '152,10 €', jackpot: 'Super' },
+      { name: 'Julie D.', city: 'Lille', date: '20 nov.', amount: '139,85 €', jackpot: 'Super' },
+      { name: 'Thomas L.', city: 'Nantes', date: '19 nov.', amount: '147,30 €', jackpot: 'Super' },
+      { name: 'Inès R.', city: 'Toulouse', date: '18 nov.', amount: '141,95 €', jackpot: 'Super' },
+      { name: 'Lucas P.', city: 'Bordeaux', date: '31 oct.', amount: '2 684 €', jackpot: 'Méga' },
+      { name: 'Amandine G.', city: 'Rennes', date: '30 sept.', amount: '2 731 €', jackpot: 'Méga' },
+      { name: 'Mehdi A.', city: 'Nice', date: '31 août', amount: '2 598 €', jackpot: 'Méga' },
+      { name: 'Sarah M.', city: 'Lyon', date: '1er janv.', amount: '41 870 €', jackpot: 'Master' }
+    ];
+    const winners = allWinners
+      .filter((w) => s.filter === 'all' || w.jackpot === s.filter)
+      .map((w) => {
+        const c = jpColors[w.jackpot];
+        return Object.assign({}, w, {
+          initial: w.name.charAt(0),
+          avatarStyle: 'width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; background: ' + c[0] + '; color: ' + c[1] + ';',
+          badgeStyle: 'display: inline-block; margin-top: 2px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: ' + c[0] + '; color: ' + c[1] + ';'
+        });
+      });
+    const chip = (key, label) => ({
+      label: label,
+      on: s.filter === key,
+      pick: () => this.setState({ filter: key }),
+      style: 'min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 13px; font-weight: 600; ' + (s.filter === key ? 'background: #1E1640; color: #FFFFFF; border: 1px solid #1E1640;' : 'background: #FFFFFF; color: #1E1640; border: 1px solid #E8DCC8;')
+    });
+    const winnerFilters = [chip('all', 'Tous'), chip('Super', 'Super'), chip('Méga', 'Méga'), chip('Master', 'Master')];
+
+    const friends = [
+      { name: 'Clara', detail: 'a joué 7 jours sur 7', badge: '+5 tickets', badgeStyle: 'font-size: 12px; font-weight: 700; color: #0F766E; background: #E6F7F5; padding: 4px 10px; border-radius: 999px;' },
+      { name: 'Hugo', detail: 'a joué 7 jours sur 7', badge: '+5 tickets', badgeStyle: 'font-size: 12px; font-weight: 700; color: #0F766E; background: #E6F7F5; padding: 4px 10px; border-radius: 999px;' },
+      { name: 'Nadia', detail: '4 jours sur 7', badge: 'en cours', badgeStyle: 'font-size: 12px; font-weight: 700; color: #92400E; background: #FEF3C7; padding: 4px 10px; border-radius: 999px;' },
+      { name: 'Romain', detail: 'inscrit hier', badge: 'en cours', badgeStyle: 'font-size: 12px; font-weight: 700; color: #92400E; background: #FEF3C7; padding: 4px 10px; border-radius: 999px;' }
+    ].map((f) => {
+      const eligible = f.badge === '+5 tickets';
+      const done = s.claimedFriends.indexOf(f.name) >= 0;
+      return Object.assign({}, f, {
+        initial: f.name.charAt(0),
+        canClaim: eligible && !done,
+        showBadge: !eligible || done,
+        badge: done ? 'Récupéré' : f.badge,
+        claim: () => this.setState({ claimedFriends: this.state.claimedFriends.concat([f.name]), friendBonus: this.state.friendBonus + 5, burstUntil: Date.now() + 1300, burstLabel: '+5 tickets', burstKind: 'gold', popUntil: Date.now() + 1800, toast: f.name + ' t’a rapporté 5 tickets pour ce soir', toastUntil: Date.now() + 2500 })
+      });
+    });
+
+    const sw = (on, key, label, detail) => ({
+      label: label,
+      detail: detail,
+      on: on,
+      toggle: () => this.setState({ [key]: !on }),
+      trackStyle: 'flex-shrink: 0; width: 52px; height: 32px; border-radius: 999px; border: none; padding: 3px; display: flex; ' + (on ? 'background: #0F766E; justify-content: flex-end;' : 'background: #D9D2C6; justify-content: flex-start;'),
+      knobStyle: 'width: 26px; height: 26px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,0.2);'
+    });
+    const notifs = [
+      sw(s.notifReminder, 'notifReminder', 'Rappel du ticket du jour', 'À 20 h 30 si tu ne l’as pas pris'),
+      sw(s.notifResults, 'notifResults', 'Résultats des tirages', 'Chaque soir à 21 h'),
+      sw(s.notifWinners, 'notifWinners', 'Nouveaux gagnants', 'Quand un gros jackpot tombe')
+    ];
+    const langStyle = (on) => 'min-height: 44px; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; ' + (on ? 'background: #FFFFFF; color: #1E1640; box-shadow: 0 1px 4px rgba(0,0,0,0.08);' : 'background: transparent; color: #6B6385;');
+
+    const navStyle = (on) => 'min-height: 48px; background: none; border: none; font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; ' + (on ? 'color: #B45309; font-weight: 700;' : 'color: #6B6385; font-weight: 500;');
+
+    const goldDays = 3 + (s.goldDayClaimed ? 1 : 0);
+    const megaQualN = present >= goal ? 1 : 0;
+    const megaBonusN = Math.max(0, present - goal);
+    const megaGoldN = goldDays;
+    const futureDays = dim - today;
+    const maxPresent = present + futureDays + (s.claimed ? 0 : 1) + Math.min(missedLeft, catchUpLeft);
+    const coins = [];
+    for (let i = 0; i < 14; i++) coins.push({ style: 'position: absolute; top: 0; left: ' + ((i * 37) % 100) + '%; width: ' + (10 + (i % 3) * 4) + 'px; height: ' + (10 + (i % 3) * 4) + 'px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #FEF3C7, #F59E0B 60%, #B45309); animation: jm-fall ' + (2.4 + (i % 4) * 0.5) + 's linear ' + (i * 0.22) + 's infinite;' });
+    const spots = [[-34, -26], [286, -30], [-40, 116], [296, 112], [126, -54], [150, 166], [-16, 50], [300, 46]];
+    const sparkles = spots.map((p, i) => ({ style: 'position: absolute; left: ' + p[0] + 'px; top: ' + p[1] + 'px; animation: jm-twinkle 1.6s ease-in-out ' + (1.2 + i * 0.2) + 's infinite; opacity: 0;' }));
+    const goldDayMode = s.goldMode === 'day';
+    const goldDayReady = s.pubs >= 10 && !s.goldDayClaimed;
+    const superLeft = tSuper - now;
+    const urgent = superLeft < 7200000;
+    const drawElapsed = s.now - s.drawStart;
+    const kind = s.drawKind;
+    const preRoll = kind === 'master' ? 12500 : 10000;
+    const rollEnd = preRoll + (kind === 'super' ? 2800 : 3600);
+    const winProgress = s.drawLate ? 1 : Math.max(0, Math.min(1, (drawElapsed - rollEnd - 400) / (kind === 'super' ? 1600 : 2600)));
+    const drawDone = s.drawOpen && drawElapsed >= rollEnd;
+    const tick = (v) => (Number(v) % 2 ? 'jm-tickA' : 'jm-tickB');
+    const num = (v, color, size) => 'display: inline-block; font-family: "Space Grotesk", sans-serif; font-size: ' + size + 'px; font-weight: 700; color: ' + color + '; font-variant-numeric: tabular-nums; animation: ' + tick(v) + ' 0.4s cubic-bezier(.3,1.6,.5,1);';
+    const boxBase = 'background: #FFFFFF; border: 1px solid #F0E4D2; border-radius: 16px; padding: 10px 0; text-align: center; overflow: hidden;';
+    const beat = (left) => (left < 600000 ? '0.6s' : '1.1s');
+    const cdLabelStyle = (hot, color) => 'font-size: 13px; margin-bottom: 8px; ' + (hot ? 'font-weight: 700; color: ' + color + ';' : 'font-weight: 500; color: #6B6385;');
+    const superCol = urgent ? '#EA580C' : '#0369A1';
+    const superSize = urgent ? 36 : 30;
+    const megaCol = megaDay ? '#E11D48' : '#BE123C';
+    const megaSize = megaDay ? 30 : 26;
+    const masterCol = masterDay ? '#B45309' : '#C2410C';
+    const masterSize = masterDay ? 30 : 26;
+    const real = new Date();
+    const realSuper = new Date(real); realSuper.setHours(21, 0, 0, 0); if (realSuper <= real) realSuper.setDate(realSuper.getDate() + 1);
+    const realMega = this.targets(real).mega;
+    const realMaster = new Date(real.getFullYear() + 1, 0, 1, 0, 0, 0);
+    const demoTo = (mode, target, remain) => () => {
+      if (this.state.demoMode === mode || this.state.demoMode === mode + 'Live') { this.setState({ demoMode: '', demoOffset: 0 }); return; }
+      this.setState({ demoMode: mode, demoOffset: (target - Date.now()) - remain });
+    };
+    this.megaQualified = qualified;
+    const lateDraw = (k) => () => this.setState({ drawOpen: true, drawLate: true, drawKind: k, drawResult: Math.random() < 0.5 ? 'win' : 'lose', drawStart: Date.now() - 60000, drawAmount: k === 'super' ? this.state.superAmt : (k === 'mega' ? this.state.megaAmt : this.state.masterAmt) });
+    const liveDemo = (k, target) => () => this.setState({ demoMode: k + 'Live', demoOffset: (target - Date.now()) - (k === 'master' ? 15000 : 20000) });
+    const openDraw = (k, result) => () => this.setState({ drawLate: false, drawOpen: true, drawKind: k, drawResult: result, drawStart: Date.now(), drawAmount: k === 'super' ? this.state.superAmt : (k === 'mega' ? this.state.megaAmt : this.state.masterAmt) });
+    const fireworks = [];
+    const fwSpots = [[70, 150, '#FCD34D', 0], [310, 120, '#F472B6', 0.5], [195, 250, '#5EEAD4', 1.0], [80, 470, '#FB7185', 1.4], [315, 430, '#FDE68A', 0.8], [200, 640, '#A78BFA', 1.7]];
+    fwSpots.forEach((f, k) => {
+      for (let r = 0; r < 12; r++) fireworks.push({ outer: 'position: absolute; left: ' + f[0] + 'px; top: ' + f[1] + 'px; width: 0; height: 0; transform: rotate(' + (r * 30) + 'deg) scale(' + (k % 2 ? 1.25 : 0.9) + ');', inner: 'position: absolute; left: -2px; top: -7px; width: 4px; height: 14px; border-radius: 2px; background: ' + f[2] + '; box-shadow: 0 0 8px ' + f[2] + '; opacity: 0; animation: jm-fw 1.8s ease-out ' + f[3] + 's infinite;' });
+    });
+    const drawBgs = { super: 'radial-gradient(circle at 50% 35%, #0E7490 0%, #0B3B5C 55%, #071A2E 100%)', mega: 'radial-gradient(circle at 50% 35%, #E11D48 0%, #881337 50%, #2A0612 100%)', master: 'radial-gradient(circle at 50% 30%, #4338CA 0%, #1E1B4B 50%, #0B0820 100%)' };
+    const softs = { super: '#CFFAFE', mega: '#FFE4E6', master: '#E0E7FF' };
+    const ringCols = { super: ['#FCD34D', '#14B8A6', '#F59E0B', '#A5F3FC'], mega: ['#FCD34D', '#FB7185', '#FFFFFF', '#F59E0B'], master: ['#FDE68A', '#A78BFA', '#F59E0B', '#FFFFFF'] };
+    const rc = ringCols[kind];
+    const masterYear = tMaster.getFullYear() - 1;
+    const loseInfo = {
+      super: ['Le Super Jackpot de ce soir (' + this.money(s.drawAmount, 2) + ') est gagné par Karim B., de Marseille.', 'Prochain tirage demain à 21 h', 'Côté Méga : ' + present + ' jours sur 25. Continue ta série !', 'À demain !'],
+      mega: ['Le Méga Jackpot de ' + megaMonth + ' (' + this.money(s.drawAmount, 0) + ') est gagné par Léa V., de Strasbourg.', 'Prochain Méga : le ' + tMegaNext.getDate() + ' ' + frMonths[tMegaNext.getMonth()] + ' à 21 h 30', 'Tes jours comptent dès demain. Vise les 25 !', 'Cap sur le mois prochain'],
+      master: ['Le JackpotMaster ' + masterYear + ' (' + this.money(s.drawAmount, 0) + ') est gagné par Antoine F., de Grenoble.', 'Bonne année quand même !', 'Le JackpotMaster ' + (masterYear + 1) + ' commence maintenant : réussis les 12 Méga pour y être.', 'Bonne année !']
+    }[kind];
+    const ticketsTonight = s.displayTickets;
+    const ticketTarget = (s.claimed ? 1 : 0) + s.adTickets + s.friendBonus;
+    const popping = ticketsTonight < ticketTarget || s.popUntil > s.now;
+    const colors = ['#F59E0B', '#DB2777', '#14B8A6', '#7C3AED'];
+    const particles = [];
+    for (let i = 0; i < 16; i++) particles.push({ style: 'position: absolute; left: -6px; top: -6px; width: ' + (i % 3 === 0 ? 14 : 10) + 'px; height: ' + (i % 3 === 0 ? 14 : 10) + 'px; border-radius: ' + (i % 2 ? '50%' : '3px') + '; background: ' + colors[i % 4] + '; animation: jm-b' + i + ' 1.1s cubic-bezier(.15,.7,.3,1) forwards;' });
+    const adLabel = s.adMode === 'ticket' ? 'Encore quelques secondes : +1 ticket à la fin' : 'Rattrapage : pub ' + (4 - s.adsLeft) + ' sur 3';
+
+    return {
+      onJackpots: onJackpots,
+      onWinners: s.nav === 'gagnants',
+      onInvite: s.nav === 'inviter',
+      onAccount: s.nav === 'compte',
+      tabs: tabs,
+      isSuper: onJackpots && s.page === 0,
+      isMega: onJackpots && s.page === 1,
+      isMaster: onJackpots && s.page === 2,
+      isGold: onJackpots && s.page === 3,
+      ticketsLabel: ticketsTonight + (ticketsTonight > 1 ? ' tickets ce soir' : ' ticket ce soir'),
+      superAmount: this.money(s.superAmt, 2),
+      megaAmount: this.money(s.megaAmt, 0),
+      masterAmount: this.money(s.masterAmt, 0),
+      cdSuper: cdSuperV,
+      cdMega: cdMega,
+      cdMaster: cdMasterV,
+      cdSuperLabel: urgent ? 'Le tirage approche ! Plus que' : 'Tirage ' + (tSuper.getDate() === now.getDate() ? 'ce soir' : 'demain') + ' à 21 h, dans',
+      cdSuperLabelStyle: cdLabelStyle(urgent, '#C2410C'),
+      superBox: boxBase + (urgent ? ' background: #FFF7ED; border: 1.5px solid #FDBA74; box-shadow: 0 4px 14px rgba(234,88,12,0.25); animation: jm-heart ' + beat(superLeft) + ' ease-in-out infinite;' : ''),
+      superNumH: num(cdSuperV.h, superCol, superSize),
+      superNumM: num(cdSuperV.m, superCol, superSize),
+      superNumS: num(cdSuperV.s, superCol, superSize),
+      megaMonth: megaMonth,
+      megaDay: megaDay,
+      megaWhen: megaDay ? 'C’est ce soir à 21 h 30 ! Tout se joue aujourd’hui.' : 'Tirage le ' + tMega.getDate() + ' ' + megaMonth + ' à 21 h 30',
+      megaHeroStyle: 'position: relative; overflow: hidden; background: linear-gradient(135deg, #F43F5E 0%, #BE123C 55%, #881337 100%); border-radius: 24px; padding: 22px 20px; display: flex; flex-direction: column; gap: 6px; color: #FFFFFF; box-shadow: 0 10px 24px rgba(225,29,72,0.30);' + (megaDay ? ' animation: jm-glow 1.6s ease-in-out infinite;' : ''),
+      megaCdLabel: megaDay ? 'C’est le jour J ! Tirage dans' : 'Tirage du Méga dans',
+      megaCdLabelStyle: cdLabelStyle(megaDay, '#BE123C'),
+      megaBox: boxBase + (megaDay ? ' background: #FFF1F2; border: 1.5px solid #FB7185; box-shadow: 0 4px 14px rgba(225,29,72,0.25); animation: jm-heart ' + beat(megaLeft) + ' ease-in-out infinite;' : ''),
+      megaNumD: num(cdMega.d, megaCol, megaSize),
+      megaNumH: num(cdMega.h, megaCol, megaSize),
+      megaNumM: num(cdMega.m, megaCol, megaSize),
+      megaNumS: num(cdMega.s, megaCol, megaSize),
+      masterHeroStyle: 'position: relative; overflow: hidden; background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 55%, #EA580C 100%); border-radius: 24px; padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; color: #1E1640; box-shadow: 0 12px 28px rgba(234,88,12,0.30);' + (masterDay ? ' animation: jm-glow-gold 1.6s ease-in-out infinite;' : ''),
+      masterCdLabel: masterDay ? 'Dernier jour de l’année ! Minuit dans' : 'Tirage au Nouvel An, à minuit, dans',
+      masterCdLabelStyle: cdLabelStyle(masterDay, '#B45309'),
+      masterBox: boxBase + (masterDay ? ' background: linear-gradient(180deg, #FFFBEB, #FEF3C7); border: 1.5px solid #F59E0B; box-shadow: 0 0 16px rgba(245,158,11,0.45); animation: jm-shake ' + (masterLeft < 600000 ? '0.22s' : '0.4s') + ' linear infinite;' : ''),
+      masterNumD: num(cdMasterV.d, masterCol, masterSize),
+      masterNumH: num(cdMasterV.h, masterCol, masterSize),
+      masterNumM: num(cdMasterV.m, masterCol, masterSize),
+      masterNumS: num(cdMasterV.s, masterCol, masterSize),
+      eventOn: megaDay || masterDay,
+      eventText: masterDay ? 'JackpotMaster ce soir à minuit' : 'Jour J : Méga Jackpot ce soir à 21 h 30',
+      eventCd: masterDay ? cdMasterV.h + ':' + cdMasterV.m + ':' + cdMasterV.s : cdMega.h + ':' + cdMega.m + ':' + cdMega.s,
+      eventGo: () => this.setState({ nav: 'jackpots', page: masterDay ? 2 : 1 }),
+      eventStyle: 'position: relative; z-index: 1; overflow: hidden; display: flex; align-items: center; gap: 10px; margin: 0 20px 10px; min-height: 44px; padding: 0 14px; border: none; border-radius: 14px; font-size: 14px; font-weight: 700; background-size: 200% 100%; animation: jm-slide 3s linear infinite; ' + (masterDay ? 'color: #451A03; background-image: linear-gradient(90deg, #FCD34D, #F59E0B, #FDE68A, #FCD34D); box-shadow: 0 6px 18px rgba(245,158,11,0.45);' : 'color: #FFFFFF; background-image: linear-gradient(90deg, #E11D48, #9F1239, #F43F5E, #E11D48); box-shadow: 0 6px 18px rgba(225,29,72,0.4);'),
+      eventDotStyle: 'flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; animation: jm-heart 1.1s ease-in-out infinite; ' + (masterDay ? 'background: #B45309;' : 'background: #FFFFFF;'),
+      superLive: liveDemo('super', realSuper),
+      megaLive: liveDemo('mega', realMega),
+      masterLive: liveDemo('master', realMaster),
+      superLiveLabel: 'Vivre 21 h en direct',
+      megaLiveLabel: 'Vivre 21 h 30 en direct',
+      masterLiveLabel: 'Vivre minuit en direct',
+      superLate: lateDraw('super'),
+      megaLate: lateDraw('mega'),
+      masterLate: lateDraw('master'),
+      superDemoLabel: (s.demoMode === 'super' || s.demoMode === 'superLive') ? 'Heure réelle' : '2 h avant',
+      superDemoGo: demoTo('super', realSuper, 7180000),
+      megaDemoLabel: (s.demoMode === 'mega' || s.demoMode === 'megaLive') ? 'Heure réelle' : 'Jour J',
+      megaDemoGo: demoTo('mega', realMega, 10780000),
+      masterDemoLabel: (s.demoMode === 'master' || s.demoMode === 'masterLive') ? 'Heure réelle' : 'Dernier jour',
+      masterDemoGo: demoTo('master', realMaster, 10780000),
+      superWin: openDraw('super', 'win'),
+      superLose: openDraw('super', 'lose'),
+      megaWin: openDraw('mega', 'win'),
+      megaLose: openDraw('mega', 'lose'),
+      masterWin: openDraw('master', 'win'),
+      masterLose: openDraw('master', 'lose'),
+      drawAria: kind === 'super' ? 'Tirage du Super Jackpot' : (kind === 'mega' ? 'Tirage du Méga Jackpot' : 'Tirage du JackpotMaster'),
+      drawBgStyle: 'position: absolute; inset: 0; z-index: 16; overflow: hidden; color: #FFFFFF; animation: jm-fade 0.3s ease-out; background: ' + drawBgs[kind] + ';',
+      drawSoft: softs[kind],
+      showFireworks: s.drawOpen && ((kind === 'master' && drawElapsed >= 9000 && drawElapsed < rollEnd) || (drawDone && s.drawResult === 'win' && kind !== 'super')),
+      fireworks: fireworks,
+      drawCountdown: s.drawOpen && drawElapsed < 10000,
+      drawCountEyebrow: kind === 'super' ? 'Super Jackpot · 21 h' : (kind === 'mega' ? 'Méga Jackpot · 21 h 30' : '31 décembre · 23 h 59'),
+      drawCountSub: kind === 'master' ? 'Tout le monde compte ensemble…' : 'Les participations sont fermées. Tirage dans…',
+      drawLateOn: s.drawOpen && s.drawLate,
+      drawLateText: kind === 'super' ? 'Résultat du tirage de 21 h' : (kind === 'mega' ? 'Résultat du Méga de 21 h 30' : 'Résultat du tirage de minuit'),
+      drawCountNum: String(Math.max(1, 10 - Math.floor(drawElapsed / 1000))),
+      drawCountStyle: 'font-family: "Space Grotesk", sans-serif; font-size: 150px; font-weight: 700; line-height: 1; color: ' + (kind === 'mega' ? '#FFFFFF' : '#FDE68A') + '; text-shadow: 0 0 40px rgba(253,230,138,0.6); font-variant-numeric: tabular-nums; animation: ' + (Math.floor(drawElapsed / 1000) % 2 ? 'jm-countA' : 'jm-countB') + ' 1s ease-out both;',
+      drawNewYear: s.drawOpen && kind === 'master' && drawElapsed >= 10000 && drawElapsed < 12500,
+      newYear: String(tMaster.getFullYear()),
+      drawEyebrow: kind === 'super' ? 'Super Jackpot · tirage de 21 h' : (kind === 'mega' ? 'Méga Jackpot · ' + megaMonth + ' · 21 h 30' : 'JackpotMaster ' + masterYear),
+      drawRollingText: kind === 'super' ? 'Tirage en cours…' : (kind === 'mega' ? 'Tirage du Méga en cours…' : 'Le grand tirage de l’année…'),
+      ringOuter: 'position: absolute; inset: 0; border-radius: 50%; border: 6px solid rgba(255,255,255,0.12); border-top-color: ' + rc[0] + '; border-right-color: ' + rc[1] + '; animation: jm-spin ' + (kind === 'super' ? '0.9s' : '0.6s') + ' linear infinite;',
+      ringInner: 'position: absolute; inset: 20px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.08); border-bottom-color: ' + rc[2] + '; border-left-color: ' + rc[3] + '; animation: jm-spin 1.4s linear infinite reverse;',
+      drawBigWin: kind !== 'super',
+      drawBadge: kind === 'mega' ? 'MÉGA JACKPOT' : 'JACKPOTMASTER',
+      drawBadgeStyle: 'font-family: "Space Grotesk", sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 2px; padding: 8px 18px; border-radius: 12px; border: 3px solid #FFFFFF; animation: jm-slam 0.6s cubic-bezier(.2,1.4,.4,1) 0.1s both; ' + (kind === 'mega' ? 'background: #E11D48; color: #FFFFFF; box-shadow: 0 8px 24px rgba(225,29,72,0.6);' : 'background: linear-gradient(135deg, #FDE68A, #F59E0B); color: #451A03; box-shadow: 0 8px 24px rgba(245,158,11,0.6);'),
+      drawWinSub: kind === 'super' ? 'Le Super Jackpot de ce soir est pour toi. Ticket n° 48 213' : (kind === 'mega' ? 'Le Méga Jackpot de ' + megaMonth + ' est pour toi !' : 'Tu commences ' + tMaster.getFullYear() + ' avec le plus gros jackpot de l’année !'),
+      drawLoseIntro: loseInfo[0],
+      drawLoseNext: loseInfo[1],
+      drawLoseHint: loseInfo[2],
+      drawLoseBtn: loseInfo[3],
+      drawLoseBtnStyle: 'min-height: 52px; padding: 0 36px; border: none; border-radius: 999px; background: #FFFFFF; font-size: 16px; font-weight: 700; color: ' + (kind === 'super' ? '#0B3B5C' : (kind === 'mega' ? '#881337' : '#1E1B4B')) + ';',
+      ticketClaimed: s.claimed,
+      ticketNotClaimed: !s.claimed,
+      claimTicket: () => this.setState({ claimed: true, toast: 'Tu participes ce soir à 21 h', toastUntil: Date.now() + 2500, burstUntil: Date.now() + 1300, burstLabel: '+1 ticket', burstKind: 'gold', popUntil: Date.now() + 700 }),
+      pubsLeftLabel: pubsLeft + (pubsLeft > 1 ? ' pubs restantes' : ' pub restante'),
+      adDisabled: adDisabled,
+      adButtonStyle: adButtonStyle,
+      watchAd: () => { if (!adDisabled) this.setState({ adPlaying: true, adProgress: 0, adMode: 'ticket' }); },
+      megaProgressLabel: present + ' jours sur 25',
+      megaStatus: qualified ? 'Qualifiée' : 'Encore ' + (goal - present) + ' jours',
+      megaStatusColor: qualified ? '#BE123C' : '#6B6385',
+      megaBarStyle: 'height: 100%; width: ' + pct + '%; background: linear-gradient(90deg, #F43F5E, #BE123C); border-radius: 999px;',
+      calendar: calendar,
+      catchUpDisabled: catchUpDisabled,
+      catchUpStyle: catchUpStyle,
+      catchUpLabel: 'Rattrapages utilisés : ' + s.caughtUp.length + ' sur 5.',
+      startCatchUp: () => { if (!catchUpDisabled) this.setState({ adPlaying: true, adProgress: 0, adMode: 'catchup', adsLeft: 3 }); },
+      masterProgressLabel: now.getMonth() + (now.getMonth() > 1 ? ' mois réussis sur 12' : ' mois réussi sur 12'),
+      megaMonthUp: megaMonth.toUpperCase(),
+      megaDateLabel: tMega.getDate() + ' ' + megaMonth,
+      masterYearLabel: String(tMaster.getFullYear() - 1),
+      soon: () => this.say('Cette page arrivera dans la vraie appli'),
+      resetDemo: () => { try { localStorage.removeItem('jm-state'); } catch (e) {} location.reload(); },
+      months: months,
+      megaTotal: String(megaQualN + megaBonusN + megaGoldN),
+      megaQual: megaQualN ? '+1' : 'encore ' + (goal - present) + ' jours',
+      megaBonus: '+' + megaBonusN,
+      megaGold: '+' + megaGoldN,
+      megaMax: 'Jours bonus et tickets d’or comptent dès que tu es qualifiée (25 jours).',
+      megaMaxOld: 'Si tu viens chaque jour jusqu’au 30, tu peux finir le mois avec ' + (Math.max(0, maxPresent - goal) + 1 + goldDays) + ' tickets Méga ou plus. Les journées en or comptent dès que tu es qualifiée.',
+      goldHint: s.goldDayClaimed ? 'Journée en or active : +1 ticket d’or' :'Encore ' + pubsLeft + (pubsLeft > 1 ? ' pubs' : ' pub') + ' pour une journée en or : +1 ticket Méga',
+      winners: winners,
+      winnerFilters: winnerFilters,
+      shareWin: () => { const u = location.origin + location.pathname; if (navigator.share) navigator.share({ title: 'JackpotMaster', text: 'Regarde les gagnants de JackpotMaster !', url: u }).catch(() => {}); else this.say('Carte des gagnants prête à partager'); },
+      friends: friends,
+      friendTickets: '+' + s.friendBonus,
+      particles: particles,
+      burstVisible: s.burstUntil > s.now,
+      burstLabel: s.burstLabel,
+      showDeadline: !s.claimed,
+      deadlineText: superLeft < 60000 ? 'Plus que ' + Math.ceil(superLeft / 1000) + ' s pour récupérer ton ticket !' : 'Plus que ' + Math.floor(superLeft / 3600000) + ' h ' + Math.floor((superLeft % 3600000) / 60000) + ' min pour récupérer ton ticket',
+      deadlineStyle: 'margin-top: 8px; text-align: center; font-size: 13px; font-weight: 700; border-radius: 999px; padding: 8px 12px; ' + (urgent ? 'background: #FFEDD5; color: #9A3412; animation: jm-pulse 1s ease-in-out infinite;' : 'background: #E0F2FE; color: #075985;'),
+      drawOpen: s.drawOpen,
+      drawRolling: s.drawOpen && drawElapsed >= preRoll && drawElapsed < rollEnd,
+      drawWin: drawDone && s.drawResult === 'win',
+      drawLose: drawDone && s.drawResult === 'lose',
+      drawAmountLabel: this.money(s.drawAmount, kind === 'super' ? 2 : 0),
+      rollNumber: (10000 + Math.floor((s.now / 41) % 89999)).toLocaleString('fr-FR'),
+      drawTicketsLabel: kind === 'super' ? 'Tu joues avec ' + Math.max(1, ticketTarget) + (ticketTarget > 1 ? ' tickets' : ' ticket') : (kind === 'mega' ? 'Tu joues avec ' + (megaQualN + megaBonusN + megaGoldN) + ' places' : 'Tu fais partie des qualifiés de l’année'),
+      winAmount: this.money(s.drawAmount * (1 - Math.pow(1 - winProgress, 3)), kind === 'super' ? 2 : 0),
+      closeDraw: () => this.setState({ drawOpen: false }),
+      collectWin: () => this.setState({ drawOpen: false, toast: this.money(this.state.drawAmount, this.state.drawKind === 'super' ? 2 : 0) + ' ajoutés à tes gains, virement sous 7 jours', toastUntil: Date.now() + 3000, burstUntil: Date.now() + 1300, burstLabel: 'Gain récupéré', burstKind: 'gold' }),
+      burstStyle: 'font-family: "Space Grotesk", sans-serif; font-size: 26px; font-weight: 700; padding: 12px 26px; border-radius: 999px; border: 3px solid #FFFFFF; white-space: nowrap; letter-spacing: -0.3px; ' + (s.burstKind === 'mega' ? 'color: #FFFFFF; background: linear-gradient(135deg, #E11D48, #9F1239); box-shadow: 0 10px 28px rgba(225,29,72,0.45);' : 'color: #1E1640; background: linear-gradient(135deg, #FDE68A, #F59E0B); box-shadow: 0 10px 28px rgba(245,158,11,0.5);'),
+      goldOpen: s.goldOpen,
+      closeGold: () => this.setState({ goldOpen: false }),
+      replayGold: () => this.setState({ goldOpen: true, goldMode: 'ticket' }),
+      replayGoldDay: () => this.setState({ goldOpen: true, goldMode: 'day', goldDayClaimed: true }),
+      activateGoldDay: () => this.setState({ goldOpen: true, goldMode: 'day', goldDayClaimed: true }),
+      goldDayReady: goldDayReady,
+      goldHintStyle: goldDayReady ? 'display: none;' : 'display: flex; align-items: center; gap: 8px; background: #FEF3C7; border-radius: 12px; padding: 10px 12px; font-size: 13px; color: #78350F; font-weight: 600;',
+      goldWashStyle: 'position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle at 50% 0%, #FFFBEB 0%, #FDE68A 40%, #FBBF24 100%); transition: opacity 1.4s ease; opacity: ' + (s.goldDayClaimed && !s.goldOpen ? 1 : 0) + ';',
+      goldTicketName: 'Ticket d’or',
+      goldTitle: 'Ticket d’or gagné !',
+      goldSub: '+1 place au Méga Jackpot, et l’appli passe en or jusqu’à minuit',
+      goldNumber: String(present),
+      goldCountLabel: 'Tu as ' + goldDays + ' tickets d’or ce mois-ci',
+      goldCardText: s.goldDayClaimed ? 'Récupéré aujourd’hui : +1 place au Méga Jackpot' : (goldDayReady ? 'Débloqué ! Touche le bouton doré' : Math.min(s.pubs, 10) + '/10 pubs : une place en plus au Méga Jackpot'),
+      goldBarStyle: 'height: 100%; width: ' + Math.min(100, s.pubs * 10) + '%; background: linear-gradient(90deg, #F59E0B, #D97706); border-radius: 999px; transition: width 0.4s ease;',
+      goldTotal: String(present + goldDays),
+      goldDaysCount: String(goldDays),
+      coins: coins,
+      sparkles: sparkles,
+      badgeStyle: 'display: flex; align-items: center; gap: 6px; border-radius: 999px; padding: 8px 12px; font-size: 13px; font-weight: 700; transform-origin: right center; transition: transform 0.22s cubic-bezier(.3,1.7,.5,1), background 0.2s, box-shadow 0.2s; ' + (popping ? 'transform: scale(1.4); background: #FDE68A; border: 1px solid #F59E0B; box-shadow: 0 6px 18px rgba(245,158,11,0.45);' : 'transform: scale(1); background: #FFFFFF; border: 1px solid #F0E4D2; box-shadow: 0 2px 8px rgba(180,120,40,0.10);'),
+      copyLink: () => { const u = location.origin + location.pathname; (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => this.say('Lien du site copié'), () => this.say(u)); },
+      shareInvite: () => { const u = location.origin + location.pathname; if (navigator.share) navigator.share({ title: 'JackpotMaster', text: 'Viens tester JackpotMaster avec moi : des jackpots gratuits tous les soirs !', url: u }).catch(() => {}); else this.say('Message d’invitation prêt à envoyer'); },
+      notifs: notifs,
+      langFr: s.lang === 'fr',
+      langEn: s.lang === 'en',
+      frStyle: langStyle(s.lang === 'fr'),
+      enStyle: langStyle(s.lang === 'en'),
+      setFr: () => this.setState({ lang: 'fr' }),
+      setEn: () => { this.setState({ lang: 'en' }); this.say('L’anglais sera traduit dans la vraie appli'); },
+      goJackpots: () => this.setState({ nav: 'jackpots' }),
+      goWinners: () => this.setState({ nav: 'gagnants' }),
+      goInvite: () => this.setState({ nav: 'inviter' }),
+      goAccount: () => this.setState({ nav: 'compte' }),
+      curJackpots: onJackpots ? 'page' : 'false',
+      curWinners: s.nav === 'gagnants' ? 'page' : 'false',
+      curInvite: s.nav === 'inviter' ? 'page' : 'false',
+      curAccount: s.nav === 'compte' ? 'page' : 'false',
+      navJackpots: navStyle(onJackpots),
+      navWinners: navStyle(s.nav === 'gagnants'),
+      navInvite: navStyle(s.nav === 'inviter'),
+      navAccount: navStyle(s.nav === 'compte'),
+      adPlaying: s.adPlaying,
+      adBarStyle: 'height: 100%; width: ' + Math.round(s.adProgress * 100) + '%; background: linear-gradient(90deg, #FCD34D, #F59E0B);',
+      adLabel: adLabel,
+      toastVisible: s.toastUntil > s.now,
+      toast: s.toast,
+      showInstallBanner: !s.installed && !s.installBannerHidden,
+      hideInstallBanner: () => this.setState({ installBannerHidden: true, toast: 'Tu pourras l’installer plus tard depuis Compte', toastUntil: Date.now() + 2500 }),
+      openInstall: () => this.setState({ installOpen: true }),
+      closeInstall: () => this.setState({ installOpen: false }),
+      installOpen: s.installOpen,
+      installIphone: s.installOs === 'iphone',
+      installAndroid: s.installOs === 'android',
+      pickIphone: () => this.setState({ installOs: 'iphone' }),
+      pickAndroid: () => this.setState({ installOs: 'android' }),
+      iphoneTabStyle: 'min-height: 44px; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; ' + (s.installOs === 'iphone' ? 'background: #1E1640; color: #FFFFFF;' : 'background: transparent; color: #6B6385;'),
+      androidTabStyle: 'min-height: 44px; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; ' + (s.installOs === 'android' ? 'background: #1E1640; color: #FFFFFF;' : 'background: transparent; color: #6B6385;'),
+      installDone: () => { if (this.state.installOs === 'android' && window.jmInstallPrompt) { const p = window.jmInstallPrompt; window.jmInstallPrompt = null; p.prompt(); p.userChoice.then((c) => { if (c.outcome === 'accepted') this.markInstalled(); }); this.setState({ installOpen: false }); return; } this.markInstalled(); },
+      markInstalledUnused: () => this.setState({ installOpen: false, installed: true, burstUntil: Date.now() + 1300, burstLabel: 'Appli installée !', burstKind: 'gold', toast: 'JackpotMaster est sur ton écran d’accueil', toastUntil: Date.now() + 2800 }),
+      installRowLabel: s.installed ? 'Appli installée ✓' : 'Installer l’appli sur mon téléphone'
+    };
+  }
+}
+
+// Ce qui doit rester d'une visite à l'autre (même jour)
+const KEEP = ['claimed', 'pubs', 'adTickets', 'caughtUp', 'goldDayClaimed', 'claimedFriends', 'friendBonus', 'installBannerHidden', 'installed', 'notifReminder', 'notifResults', 'notifWinners', 'filter'];
+const dayKey = () => new Date().toDateString();
+const { createApp, reactive, computed, markRaw } = Vue;
+const comp = new Component({});
+try {
+  const saved = JSON.parse(localStorage.getItem('jm-state') || 'null');
+  if (saved && saved.day === dayKey()) { KEEP.forEach((k) => { if (k in saved.s) comp.state[k] = saved.s[k]; }); comp.state.displayTickets = 0; }
+  else if (saved) { ['installBannerHidden', 'installed', 'notifReminder', 'notifResults', 'notifWinners'].forEach((k) => { if (k in saved.s) comp.state[k] = saved.s[k]; }); }
+} catch (e) {}
+if (window.jmStandalone) comp.state.installed = true;
+comp.state = reactive(comp.state);
+const vals = computed(() => comp.renderVals());
+const keys = Object.keys(comp.renderVals());
+createApp({
+  template: document.getElementById('tpl').innerHTML,
+  setup() {
+    const out = {};
+    keys.forEach((k) => Object.defineProperty(out, k, { enumerable: true, get: () => vals.value[k] }));
+    return out;
+  },
+  mounted() {
+    comp.componentDidMount();
+    setInterval(() => {
+      try { const o = {}; KEEP.forEach((k) => { o[k] = comp.state[k]; }); localStorage.setItem('jm-state', JSON.stringify({ day: dayKey(), s: o })); } catch (e) {}
+    }, 1000);
+  }
+}).mount('#app');
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+
+</script>
+</body>
+</html>
